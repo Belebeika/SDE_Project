@@ -23,10 +23,12 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-from Controller import forum, auth
+from Controller import forum, auth, vacancyAndResume
 
 app.register_blueprint(forum.forum)
 app.register_blueprint(auth.auth)
+app.register_blueprint(vacancyAndResume.vacancyAndResume)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)

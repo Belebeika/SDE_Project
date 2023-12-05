@@ -30,8 +30,8 @@ class Vacancy(db.Model):
     # На странице вакансии
     text = db.Column(db.String, nullable=False)
     # Изображение вакансии на вкладке с прокруткой вакансий
-    title_image = db.Column(db.LargeBinary, nullable=False)
-    User_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    title_image = db.Column(db.LargeBinary, nullable=True)
+    User_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     user = db.relationship('User', backref=db.backref('forum_posts', lazy=True))
     pass
 
