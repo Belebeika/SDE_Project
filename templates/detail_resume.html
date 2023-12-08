@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Подробная информация о резюме{% endblock %}
+
+{% block content %}
+    <h1>Подробная информация о резюме</h1>
+
+    <p><strong>Заголовок:</strong> {{ resume.title }}</p>
+    <p><strong>Описание:</strong> {{ resume.description }}</p>
+    <p><strong>Навыки:</strong> {{ resume.skills }}</p>
+    <!-- Добавьте другие поля, если необходимо -->
+
+    <a href="{{ url_for('forum.resumes') }}">Вернуться к списку резюме</a>
+{% endblock %}
