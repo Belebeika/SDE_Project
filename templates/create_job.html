@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Create a New Job</h2>
+      <form method="post" action="{{ url_for('job.create_job') }}">
+    <label for="title">Title:</label>
+    <input type="text" name="title" required><br>
+
+    <label for="description">Description:</label>
+    <textarea name="description" required></textarea><br>
+
+    <label for="requirements">Requirements:</label>
+    <textarea name="requirements" required></textarea><br>
+
+    <button type="submit">Create Job</button>
+  </form>
+{% endblock %}

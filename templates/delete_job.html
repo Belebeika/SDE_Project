@@ -1,0 +1,16 @@
+<!-- delete_job.html -->
+
+{% extends "base.html" %}
+
+{% block title %}Delete Job{% endblock %}
+
+{% block content %}
+    <h1>Delete Job</h1>
+    <p>Are you sure you want to delete the job "{{ job.title }}"?</p>
+
+    <form method="post" action="{{ url_for('job.delete_job', job_id=job.id) }}">
+        <button type="submit">Confirm Delete</button>
+    </form>
+
+    <a href="{{ url_for('forum.jobs') }}">Cancel</a>
+{% endblock %}

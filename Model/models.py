@@ -23,42 +23,59 @@ class User(UserMixin,db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-class Vacancy(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    # На странице со всеми вакансиями
-    title = db.Column(db.String, nullable=False)
-    # На странице вакансии
-    text = db.Column(db.String, nullable=False)
-    # Изображение вакансии на вкладке с прокруткой вакансий
-    title_image = db.Column(db.LargeBinary, nullable=True)
-    User_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-    user = db.relationship('User', backref=db.backref('forum_posts', lazy=True))
-    pass
 
-# Изображения отображаемые на странице с вакансией
-class Vacancy_images(db.Model):
+class Resume(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    image = db.Column(db.LargeBinary, nullable=False)
-    Vacancy_id = db.Column(db.Integer, db.ForeignKey('vacancy.id'), nullable=False)
-    vacancy = db.relationship('Vacancy', backref=db.backref('forum_posts', lazy=True))
-    pass
+    title = db.Column(db.String(300), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    skills = db.Column(db.String(200))
+    # Добавьте другие поля, необходимые для резюме
 
-class Rezume(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    # На странице со всеми резюме
-    title = db.Column(db.String, nullable=False)
-    # На странице резюме
-    text = db.Column(db.String, nullable=False)
-    # Изображение резюме на вкладке с прокруткой резюме
-    title_image = db.Column(db.LargeBinary, nullable=False)
-    User_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship('User', backref=db.backref('rezumes', lazy=True))
-    pass
 
-# Изображения отображаемые на странице с резюме
-class Rezume_images(db.Model):
+class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    image = db.Column(db.LargeBinary, nullable=False)
-    Rezume_id = db.Column(db.Integer, db.ForeignKey('rezume.id'), nullable=False)
-    rezume = db.relationship('Rezume', backref=db.backref('rezume_images', lazy=True))
-    pass
+    title = db.Column(db.String(300), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    requirements = db.Column(db.String(200))
+    # Добавьте другие поля, необходимые для вакансии
+
+
+# class Vacancy(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     # На странице со всеми вакансиями
+#     title = db.Column(db.String, nullable=False)
+#     # На странице вакансии
+#     text = db.Column(db.String, nullable=False)
+#     # Изображение вакансии на вкладке с прокруткой вакансий
+#     title_image = db.Column(db.LargeBinary, nullable=True)
+#     User_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+#     user = db.relationship('User', backref=db.backref('forum_posts', lazy=True))
+#     pass
+#
+# # Изображения отображаемые на странице с вакансией
+# class Vacancy_images(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     image = db.Column(db.LargeBinary, nullable=False)
+#     Vacancy_id = db.Column(db.Integer, db.ForeignKey('vacancy.id'), nullable=False)
+#     vacancy = db.relationship('Vacancy', backref=db.backref('forum_posts', lazy=True))
+#     pass
+#
+# class Rezume(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     # На странице со всеми резюме
+#     title = db.Column(db.String, nullable=False)
+#     # На странице резюме
+#     text = db.Column(db.String, nullable=False)
+#     # Изображение резюме на вкладке с прокруткой резюме
+#     title_image = db.Column(db.LargeBinary, nullable=False)
+#     User_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+#     user = db.relationship('User', backref=db.backref('rezumes', lazy=True))
+#     pass
+#
+# # Изображения отображаемые на странице с резюме
+# class Rezume_images(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     image = db.Column(db.LargeBinary, nullable=False)
+#     Rezume_id = db.Column(db.Integer, db.ForeignKey('rezume.id'), nullable=False)
+#     rezume = db.relationship('Rezume', backref=db.backref('rezume_images', lazy=True))
+#     pass

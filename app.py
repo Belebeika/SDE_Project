@@ -1,4 +1,3 @@
-# app.py
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -16,23 +15,19 @@ login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
 
 from Model.models import User
-
+from Controller.job import init_job_blueprint
+from Controller.resume import resume
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
-from Controller import forum, auth, vacancyAndResume
+from Controller import forum, auth
 
 app.register_blueprint(forum.forum)
 app.register_blueprint(auth.auth)
-app.register_blueprint(vacancyAndResume.vacancyAndResume)
-
+init_job_blueprint(app)
+app.register_blueprint(resume)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
-
-# flask shell
-# >>> from app import db
-# >>> db.create_all()
+    app.run(host='0.0.0.0', port=80, debug=True)

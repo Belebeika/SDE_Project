@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Главное меню{% endblock %}
+
+{% block content %}
+    <h1>Список резюме</h1>
+
+    {% for resume in resumes %}
+        <div>
+            <h2>{{ resume.title }}</h2>
+            <p>{{ resume.skills }}</p>
+            <a href="{{ url_for('resume.detail_resume', resume_id=resume.id) }}">Подробнее</a>
+            <a href="{{ url_for('resume.edit_resume', resume_id=resume.id) }}">Редактировать</a>
+            <a href="{{ url_for('resume.delete_resume', resume_id=resume.id) }}">Удалить</a>
+        </div>
+        <hr>
+    {% endfor %}
+
+    <a href="{{ url_for('resume.create_resume') }}">Создать новое резюме</a>
+{% endblock %}

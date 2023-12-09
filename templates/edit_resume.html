@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Редактирование резюме{% endblock %}
+
+{% block content %}
+    <h1>Редактирование резюме</h1>
+
+    <form method="post" action="{{ url_for('resume.edit_resume', resume_id=resume.id) }}">
+        <label for="title">Заголовок:</label>
+        <input type="text" id="title" name="title" value="{{ resume.title }}" required>
+        <br>
+        <label for="description">Описание:</label>
+        <textarea id="description" name="description" required>{{ resume.description }}</textarea>
+        <br>
+        <label for="skills">Навыки:</label>
+        <input type="text" id="skills" name="skills" value="{{ resume.skills }}" required>
+        <br>
+        <!-- Добавьте другие поля, если необходимо -->
+        <button type="submit">Сохранить изменения</button>
+    </form>
+{% endblock %}
