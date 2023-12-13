@@ -1,3 +1,5 @@
+<!-- resumes.html -->
+
 {% extends "base.html" %}
 
 {% block title %}Главное меню{% endblock %}
@@ -5,10 +7,19 @@
 {% block content %}
     <h1>Список резюме</h1>
 
+    <a href="{{ url_for('resume.create_resume') }}">Создать новое резюме</a>
+    <p></p>
+
     {% for resume in resumes %}
-        <div>
+        <div class="resume-box">
             <h2>{{ resume.title }}</h2>
             <p>{{ resume.skills }}</p>
+
+            <!-- Отображение изображения, если оно есть -->
+            {% if resume.image_filename %}
+                <img src="{{ url_for('static', filename='img/resume_uploads/' + resume.image_filename) }}" alt="{{ resume.title }} Image" class="resume-image">
+            {% endif %}
+
             <a href="{{ url_for('resume.detail_resume', resume_id=resume.id) }}">Подробнее</a>
             <a href="{{ url_for('resume.edit_resume', resume_id=resume.id) }}">Редактировать</a>
             <a href="{{ url_for('resume.delete_resume', resume_id=resume.id) }}">Удалить</a>
@@ -16,5 +27,4 @@
         <hr>
     {% endfor %}
 
-    <a href="{{ url_for('resume.create_resume') }}">Создать новое резюме</a>
 {% endblock %}

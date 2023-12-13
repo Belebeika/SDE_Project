@@ -1,0 +1,14 @@
+<!-- region_selection.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Select Region{% endblock %}
+
+{% block content %}
+  <h2>Select Region</h2>
+  <form method="POST" action="{{ url_for('forum.jobs') }}">
+    {{ form.hidden_tag() }}
+    {{ form.region.label }} {{ form.region(size=32) }}
+    {{ form.submit() }}
+  </form>
+{% endblock %}

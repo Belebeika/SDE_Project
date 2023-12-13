@@ -5,19 +5,59 @@
 {% block title %}Главное меню{% endblock %}
 
 {% block content %}
+    <style>
+        .job-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .job-container img {
+            max-width: 20%;
+            height: auto;
+            display: block;
+            margin: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+
     <h1>Тут будут вакансии!</h1>
 
-    <ul>
-        {% for job in jobs %}
-            <li>
-                <h2>Специальность: {{ job.title }}</h2>
-                <p> Требования: {{ job.requirements }}</p>
-                <a href="{{ url_for('job.show_job', job_id=job.id) }}">Подробнее</a>
-                <a href="{{ url_for('job.edit_job', job_id=job.id) }}">Edit</a>
-                <a href="{{ url_for('job.delete_job', job_id=job.id) }}">Delete</a>
-            </li>
-        {% endfor %}
-    </ul>
+    {% if current_user.is_authenticated %}  {# Проверяем, залогинен ли текущий пользователь #}
+        <a href="{{ url_for('job.create_job') }}">Create a Job</a>
+    {% else %}
+        {# Если пользователь анонимный, показываем форму для выбора региона #}
+        <form method="POST" action="{{ url_for('forum.jobs') }}">
+            {{ form.hidden_tag() }}
+            {{ form.region.label }} {{ form.region(size=32) }}
+            {{ form.submit() }}
+        </form>
+    {% endif %}
 
-    <a href="{{ url_for('job.create_job') }}">Create a Job</a>
+    {% if jobs %}
+        <ul>
+            {% for job in jobs %}
+                <li class="job">
+                    <div class="job-container">
+                        <h2>Специальность: {{ job.title }}</h2>
+                        <p> Требования: {{ job.requirements }}</p>
+
+                        {% if job.image_filename %}
+                            <img src="{{ url_for('static', filename='img/job_uploads/' + job.image_filename) }}" alt="{{ job.title }} Image">
+                        {% endif %}
+
+                        <a href="{{ url_for('job.show_job', job_id=job.id) }}">Подробнее</a>
+
+                        {% if current_user.is_authenticated and job.author == current_user %}  {# Проверяем, является ли текущий пользователь автором #}
+                            <a href="{{ url_for('job.edit_job', job_id=job.id) }}">Edit</a>
+                            <a href="{{ url_for('job.delete_job', job_id=job.id) }}">Delete</a>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No jobs available for the selected region.</p>
+    {% endif %}
 {% endblock %}
