@@ -4,11 +4,8 @@ from wtforms.validators import EqualTo, Email, DataRequired, Length
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, SelectField
 
-class RegistrationForm(FlaskForm):
-    firstname = StringField('Имя пользователя', validators=[DataRequired(), Length(min=2, max=20)])
-    lastname = StringField('Фамилия пользователя', validators=[DataRequired(), Length(min=2, max=20)])
-    age = StringField('Возраст', validators=[DataRequired(), Length(min=1, max=3)])
-    region_choices = [
+
+region_choices = [
         ('Республика Адыгея', 'Республика Адыгея'),
         ('Республика Алтай', 'Республика Алтай'),
         ('Республика Башкортостан', 'Республика Башкортостан'),
@@ -90,6 +87,11 @@ class RegistrationForm(FlaskForm):
         ('Еврейская автономная область', 'Еврейская автономная область'),
         ('Агинский Бурятский автономный округ', 'Агинский Бурятский автономный округ'),
     ]
+
+class RegistrationForm(FlaskForm):
+    firstname = StringField('Имя пользователя', validators=[DataRequired(), Length(min=2, max=20)])
+    lastname = StringField('Фамилия пользователя', validators=[DataRequired(), Length(min=2, max=20)])
+    age = StringField('Возраст', validators=[DataRequired(), Length(min=1, max=3)])
     region = SelectField('Регион', choices=region_choices, validators=[DataRequired()])
 
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -102,4 +104,17 @@ class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     submit = SubmitField('Войти')
+
+
+
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+
+
+class RegionForm(FlaskForm):
+    region = SelectField('Выберите регион', choices=region_choices)
+    submit = SubmitField('Показать вакансии')
+
+
 
