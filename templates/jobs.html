@@ -10,6 +10,11 @@
             margin-bottom: 10px;
             overflow: hidden;
         }
+        .float-left {
+              text-align: center;
+              float: right;
+            padding-right: 20%;
+        }
 
         .job-container img {
             max-width: 20%;
@@ -17,10 +22,14 @@
             display: block;
             margin: auto;
             margin-bottom: 10px;
+            float: left;
+            border-radius : 15px;
         }
 
         .form-group {
             margin-bottom: 15px;
+            padding-top: 10px;
+            float: right;
         }
 
         label {
@@ -67,8 +76,8 @@
             {% for job in jobs %}
                 <li class="job">
                     <div class="job-container">
-                        <h2>Специальность: {{ job.title }}</h2>
-                        <p> Требования: {{ job.requirements }}</p>
+                        <h2 class = "float-left">Специальность: {{ job.title }}</h2>
+                        <h2 class="float-left"> Требования: {{ job.requirements }}</h2>
 
                         {% if job.image_filename %}
                             <img src="{{ url_for('static', filename='img/job_uploads/' + job.image_filename) }}" alt="{{ job.title }} Image">
