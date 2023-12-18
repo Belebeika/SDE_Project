@@ -1,13 +1,18 @@
 /* Основные стили */
+html {
+     height:100%;
+}
+
 body {
-    background-color: #1a1a1a; /* Тёмный фон */
-    color: #ffffff; /* Светлый текст */
-    font-family: sans-serif;
+    background: rgb(230,182,198);
+    background: linear-gradient(124deg, rgba(230,182,198,1) 0%, rgba(170,149,184,1) 52%, rgba(75,36,94,1) 100%);
+    color : #ffffff;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 }
 
 header, footer {
-    background-color: #333; /* Тёмный фон для блоков */
     color: #fff; /* Светлый текст для блоков */
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 }
 
 a {
@@ -30,7 +35,12 @@ ul {
 }
 
 li {
-    margin-bottom: 10px; /* Добавляем отступ между элементами списка */
+    background: #bb6868;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius : 5px;
 }
 
 form {
@@ -91,9 +101,10 @@ input[type="submit"]:hover {
 
 /* Стили для Header и навигации */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
+    background: #32213b;
+    color : #ffffff;
+    padding : 10px;
+    border-radius : 15px;
     text-align: center;
 }
 
@@ -116,7 +127,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #66b3ff;
+    color: #32213b;
 }
 
 /* Стили для содержимого в блоке main */
@@ -197,4 +208,20 @@ main {
     display: block; /* Избежать отступов снизу */
     margin: auto; /* Центрирование по горизонтали */
     margin-bottom: 15px; /* Отступ снизу от изображения */
+}
+
+.main_page_plate {
+    background: #32213b;
+    color : #ffffff;
+    padding : 10px;
+    border-radius : 15px;
+}
+
+
+.logo {
+    padding-top : 15px;
+    padding-bottom : 35px;
+    padding-right : 60px;
+    font-size : 300%;
+    color : #bb6868;
 }

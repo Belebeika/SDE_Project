@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="">
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
 <head>
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="main_page_plate">
+        <div class="logo">Work-Searcher</div>
         <ul>
             <li><a href="/">Домой</a></li>
             {% if not current_user.is_authenticated %}
@@ -16,14 +20,12 @@
             {% if current_user.is_authenticated %}
                 <li><a href="/logout">Выйти</a></li>
             {% endif %}
-        </ul>
-        Тут надо лого хуёго регион и так далее и так далее
-        <ul>
             <li><a href="/jobs">Вакансии</a></li>
             <li><a href="/resumes">Резюме</a></li>
         </ul>
         </nav>
     </header>
+
 
     <main>
         {% block content %}{% endblock %}
