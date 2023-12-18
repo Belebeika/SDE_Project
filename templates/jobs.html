@@ -28,7 +28,7 @@
         <a href="{{ url_for('job.create_job') }}">Create a Job</a>
     {% else %}
         {# Если пользователь анонимный, показываем форму для выбора региона #}
-        <form method="POST" action="{{ url_for('forum.jobs') }}">
+        <form class = "for_region_selection" method="POST" action="{{ url_for('forum.jobs') }}">
             {{ form.hidden_tag() }}
             {{ form.region.label }} {{ form.region(size=32) }}
             {{ form.submit() }}

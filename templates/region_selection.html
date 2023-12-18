@@ -5,10 +5,10 @@
 {% block title %}Select Region{% endblock %}
 
 {% block content %}
-  <h2>Select Region</h2>
-  <form method="POST" action="{{ url_for('forum.jobs') }}">
+  <form method="POST" class = "form-delation1" action="{{ url_for('forum.jobs') }}">
     {{ form.hidden_tag() }}
-    {{ form.region.label }} {{ form.region(size=32) }}
+    <div class="form-delation2">{{ form.region.label }}</div>
+    <div class = "for_region_selection">{{ form.region(size=32) }} </div>
     {{ form.submit() }}
   </form>
 {% endblock %}

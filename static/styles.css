@@ -5,9 +5,10 @@ html {
 
 body {
     background: rgb(230,182,198);
-    background: linear-gradient(124deg, rgba(230,182,198,1) 0%, rgba(170,149,184,1) 52%, rgba(75,36,94,1) 100%);
+    background: linear-gradient(124deg, rgba(230,182,198,1) 0%, rgb(151, 131, 165) 52%, rgba(75,36,94,1) 100%);
     color : #ffffff;
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    -webkit-background-size: cover;
 }
 
 header, footer {
@@ -17,7 +18,7 @@ header, footer {
 
 a {
     text-decoration: none;
-    color: #66b3ff; /* Цвет ссылок */
+    color: #bb6868; /* Цвет ссылок */
 }
 
 label {
@@ -40,7 +41,8 @@ li {
     padding-bottom: 15px;
     padding-right: 30px;
     padding-left: 30px;
-    border-radius : 5px;
+    border-radius : 15px;
+    border: medium solid #9e3a3a;
 }
 
 form {
@@ -49,7 +51,7 @@ form {
 }
 
 input, textarea {
-    background-color: #555; /* Тёмный фон для полей ввода */
+    background: rgba(50,33,59, 0.5);/* Тёмный фон для полей ввода */
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -63,14 +65,17 @@ input, textarea {
 
 input[type="submit"] {
     width: 100%;
-    background-color: #66b3ff;
+    background-color: #bb6868;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
+    border: medium solid #9e3a3a;
+    border-radius : 10px;
+    font-size : 140%;
 }
 
 input[type="submit"]:hover {
-    background-color: #3385ff;
+    background-color: #bb6868;
 }
 
 /* Стили для страницы входа и регистрации */
@@ -78,18 +83,22 @@ input[type="submit"]:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh; /* Занимаем 60% высоты экрана */
+    height: 50vh; /* Занимаем 60% высоты экрана */
     margin-bottom: 20px; /* Восстанавливаем отступ между блоками */
+    padding-right : 40px;
 }
 
 .login-container, .register-container {
-    background-color: #333;
-    padding: 20px;
-    border-radius: 8px;
+    background: rgba(50,33,59, 1);
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    border-radius: 15px;
     max-width: 400px; /* Максимальная ширина блока */
     width: 100%; /* Ширина блока 100% */
     box-sizing: border-box; /* Учтем padding в ширине */
     margin-bottom: 20px; /* Восстанавливаем отступ между блоками */
+    border: medium solid #32213b;
 }
 
 .login-container h2, .register-container h2 {
@@ -101,7 +110,6 @@ input[type="submit"]:hover {
 
 /* Стили для Header и навигации */
 header {
-    background: #32213b;
     color : #ffffff;
     padding : 10px;
     border-radius : 15px;
@@ -133,7 +141,8 @@ nav a:hover {
 /* Стили для содержимого в блоке main */
 main {
     text-align: center;
-    padding-top: 100px;
+    font-size : 85%;
+    padding-top: 20px;
     padding-bottom: 100px;
     margin-bottom: 20px; /* Восстанавливаем отступ между блоками */
 }
@@ -153,7 +162,7 @@ main {
 }
 
 .forum-post {
-    background-color: #333;
+    background-color: #32213b;
     padding: 15px;
     border-radius: 8px;
     box-sizing: border-box;
@@ -211,12 +220,13 @@ main {
 }
 
 .main_page_plate {
-    background: #32213b;
+    background: rgba(50,33,59, 0.8);
     color : #ffffff;
-    padding : 10px;
+    padding : 20px;
     border-radius : 15px;
-}
+    border: medium solid #32213b;
 
+}
 
 .logo {
     padding-top : 15px;
@@ -224,4 +234,29 @@ main {
     padding-right : 60px;
     font-size : 300%;
     color : #bb6868;
+    font-weight : bold;
+}
+
+.sign_in_up {
+    color : #bb6868;
+    font-weight : bold;
+}
+
+.for_region_selection {
+    color : #ffffff;
+    box-sizing:border-box;
+    width:100%;
+    border: 5px solid #32213b;
+    border-radius : 25px;
+}
+
+
+.form-delation1 {
+    padding-top: 10px;
+}
+
+.form-delation2 {
+    padding-bottom: 10px;
+    font-size : 120%;
+    font-weight : bold;
 }
