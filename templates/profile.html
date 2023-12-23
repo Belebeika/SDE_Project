@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+<title>Личный кабинет</title>
+
+{% endblock %}
+
+
+{% block content %}
+
+<body>
+    <h1>Привет, {{ user.firstname }}!</h1>
+    <p>Имя: {{ user.firstname }}</p>
+    <p>Фамилия: {{ user.lastname }}</p>
+    <p>Регион: {{ user.region }}</p>
+    <p>Возраст: {{ user.age }}</p>
+    <p>Email: {{ user.email }}</p>
+    <a href="{{ url_for('profile.edit_profile') }}">Редактировать профиль</a>
+</body>
+
+
+
+
+{% endblock %}
+
+

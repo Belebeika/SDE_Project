@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Редактировать профиль
+{% endblock %}
+
+{% block content %}
+<body>
+    <h1>Редактировать профиль</h1>
+
+    <form method="POST" action="{{ url_for('profile.edit_profile') }}" class="profile-form">
+        {{ form.hidden_tag() }}
+
+
+        <div class="form-group">
+            <label for="region">{{ form.region.label }}</label>
+            {{ form.region(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="firstname">{{ form.firstname.label }}</label>
+            {{ form.firstname(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label for="lastname">{{ form.lastname.label }}</label>
+            {{ form.lastname(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label for="age">{{ form.age.label }}</label>
+            {{ form.age(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label for="email">{{ form.email.label }}</label>
+            {{ form.email(class="form-control") }}
+        </div>
+
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+
+    <a href="{{ url_for('forum.profile') }}">Назад к профилю</a>
+</body>
+{% endblock %}

@@ -1,0 +1,279 @@
+/* Основные стили */
+html {
+     height:100%;
+}
+
+body {
+    background: rgb(230,182,198);
+    background: linear-gradient(124deg, rgba(230,182,198,1) 0%, rgb(151, 131, 165) 52%, rgba(75,36,94,1) 100%);
+    color : #ffffff;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    -webkit-background-size: cover;
+}
+
+header, footer {
+    color: #fff; /* Светлый текст для блоков */
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #ffffff; /* Цвет ссылок */
+    font-size: 150%;
+    padding: 15px;
+}
+
+label {
+    font-size: 18px;
+}
+
+a:hover {
+    color: #ffffff; /* Изменение цвета ссылок при наведении */
+}
+
+ul {
+    list-style-type: none; /* Убираем маркеры списка */
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    background: #bb6868;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius : 15px;
+    border: medium solid #9e3a3a;
+}
+
+form {
+    color: #fff; /* Светлый текст для форм */
+    padding: 20px; /* Добавляем отступ вокруг формы */
+}
+
+input, textarea {
+    background: rgba(50,33,59, 0.5);/* Тёмный фон для полей ввода */
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 25px;
+    margin-top: 10px;/* Восстанавливаем отступ между элементами */
+    font-size: 18px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #bb6868;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    border: medium solid #9e3a3a;
+    border-radius : 10px;
+    font-size : 140%;
+}
+
+input[type="submit"]:hover {
+    background-color: #bb6868;
+}
+
+/* Стили для страницы входа и регистрации */
+.login-page, .register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Занимаем 60% высоты экрана */
+    margin-bottom: 20px; /* Восстанавливаем отступ между блоками */
+    padding-right : 40px;
+}
+
+.login-container, .register-container {
+    background: rgba(50,33,59, 1);
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    border-radius: 15px;
+    max-width: 400px; /* Максимальная ширина блока */
+    width: 100%; /* Ширина блока 100% */
+    box-sizing: border-box; /* Учтем padding в ширине */
+    margin-bottom: 20px; /* Восстанавливаем отступ между блоками */
+    border: medium solid #32213b;
+}
+
+.login-container h2, .register-container h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 36px;
+}
+
+/* Стили для Header и навигации */
+header {
+    color : #ffffff;
+    padding : 10px;
+    border-radius : 15px;
+    text-align: center;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin-right: 15px;
+}
+
+nav a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: #32213b;
+}
+
+/* Стили для содержимого в блоке main */
+main {
+    text-align: center;
+    font-size : 85%;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    margin-bottom: 20px; /* Восстанавливаем отступ между блоками */
+}
+
+/* styles.css */
+
+/* Добавляем стили для блока форума */
+.forum-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Автоматическое заполнение, минимальная ширина 30% */
+    gap: 20px; /* Отступ между блоками */
+}
+
+.forum-post-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.forum-post {
+    background-color: #32213b;
+    padding: 15px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    word-break: break-word;
+}
+
+.forum-post h3 {
+    margin-bottom: 10px;
+}
+
+.forum-post p {
+    margin: 0;
+}
+
+.forum-post:hover {
+    background-color: #555;
+}
+
+.creat-a-comment {
+    padding-top: 35px;
+}
+
+.creat-a-comment form {
+    padding-top: 5px;
+}
+
+.comments-to-post{
+    display: grid;
+    gap: 20px;
+}
+
+.comment {
+    padding-top: 0;
+}
+
+
+.resume-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    /* Другие стили по вашему выбору */
+}
+
+/* Добавьте стили для обеспечения единообразного вида изображений */
+.resume-image {
+    max-width: 10%; /* Сделать изображение адаптивным */
+    height: auto; /* Поддерживать пропорции */
+    display: block; /* Избежать отступов снизу */
+    margin: auto; /* Центрирование по горизонтали */
+    margin-bottom: 15px; /* Отступ снизу от изображения */
+}
+
+.main_page_plate {
+    background: rgba(50,33,59, 0.8);
+    color : #ffffff;
+    padding : 20px;
+    border-radius : 15px;
+    border: medium solid #32213b;
+
+}
+
+.logo {
+    padding-top : 15px;
+    padding-bottom : 35px;
+    padding-right : 60px;
+    font-size : 300%;
+    color : #bb6868;
+    font-weight : bold;
+}
+
+.sign_in_up {
+    color : #bb6868;
+    font-weight : bold;
+}
+
+.for_region_selection {
+    box-sizing:border-box;
+    width:100%;
+    border: 5px solid #32213b;
+    border-radius : 25px;
+    padding : 15px;
+}
+
+
+.form-delation1 {
+    padding-top: 10px;
+}
+
+.form-delation2 {
+    padding-bottom: 10px;
+    font-size : 120%;
+    font-weight : bold;
+}
+
+.profile-form {
+    max-width: 400px; /* Измените по необходимости */
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Настройки стилей для всех form-control полей */
+.form-control {
+    width: 100%;
+    box-sizing: border-box;
+}
