@@ -27,7 +27,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return redirect(url_for('forum.index'))
+        return redirect(url_for('CZN.index'))
     return render_template('register.html', form=form)
 
 
@@ -44,7 +44,7 @@ def login():
             flash('Please check your login details and try again.')
             return redirect(url_for('auth.login'))
         login_user(user)
-        return redirect(url_for('forum.index'))
+        return redirect(url_for('CZN.index'))
 
     return render_template('login.html', form=form)
 
@@ -53,4 +53,4 @@ def login():
 @auth.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('forum.index'))
+    return redirect(url_for('CZN.index'))

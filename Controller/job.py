@@ -62,7 +62,7 @@ def create_job():
             db.session.add(new_job)
             db.session.commit()
             flash('Job created successfully!', 'success')
-            return redirect(url_for('forum.jobs'))
+            return redirect(url_for('CZN.jobs'))
         except:
             flash('An error occurred while adding the job!', 'error')
 
@@ -89,12 +89,12 @@ def edit_job(job_id):
 
     if not job:
         flash('Job not found', 'error')
-        return redirect(url_for('forum.jobs'))
+        return redirect(url_for('CZN.jobs'))
 
     # Проверяем, создал ли текущий пользователь эту работу
     if job.author != current_user:
         flash('You are not authorized to edit this job', 'error')
-        return redirect(url_for('forum.jobs'))
+        return redirect(url_for('CZN.jobs'))
 
     if request.method == 'POST':
         # Delete the old file before updating the job
@@ -110,7 +110,7 @@ def edit_job(job_id):
         try:
             db.session.commit()
             flash('Job updated successfully!', 'success')
-            return redirect(url_for('forum.jobs'))
+            return redirect(url_for('CZN.jobs'))
         except:
             flash('An error occurred while updating the job', 'error')
 
@@ -125,19 +125,19 @@ def delete_job(job_id):
 
     if not job:
         flash('Job not found', 'error')
-        return redirect(url_for('jobs'))
+        return redirect(url_for('CZN.jobs'))
 
     # Проверяем, создал ли текущий пользователь эту работу
     if job.author != current_user:
         flash('You are not authorized to delete this job', 'error')
-        return redirect(url_for('forum.jobs'))
+        return redirect(url_for('CZN.jobs'))
 
     if request.method == 'POST':
         try:
             db.session.delete(job)
             db.session.commit()
             flash('Job deleted successfully!', 'success')
-            return redirect(url_for('forum.jobs'))
+            return redirect(url_for('CZN.jobs'))
         except:
             flash('An error occurred while deleting the job', 'error')
 
