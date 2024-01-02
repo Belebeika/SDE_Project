@@ -4,15 +4,15 @@ from flask_login import login_required, current_user
 from Model.models import User, Job, Resume
 from forms import RegionForm
 
-forum = Blueprint('forum', __name__)
+CZN = Blueprint('CZN', __name__)
 
-@forum.route('/')
+@CZN.route('/')
 def index():
     title = 'Главное меню'
     return render_template('index.html', title=title)
 
 
-@forum.route("/jobs", methods=['GET', 'POST'])
+@CZN.route("/jobs", methods=['GET', 'POST'])
 def jobs():
     # Проверяем, залогинен ли пользователь
     if current_user.is_authenticated:
@@ -31,7 +31,7 @@ def jobs():
     return render_template('region_selection.html', form=form)
 
 
-@forum.route("/resumes")
+@CZN.route("/resumes")
 @login_required
 def resumes():
     resumes = Resume.query.filter_by(user=current_user).all()

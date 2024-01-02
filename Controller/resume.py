@@ -48,7 +48,7 @@ def create_resume():
             db.session.add(new_resume)
             db.session.commit()
             flash('Resume created successfully!', 'success')
-            return redirect(url_for('forum.resumes'))
+            return redirect(url_for('CZN.resumes'))
         except:
             flash('An error occurred while adding the resume!', 'error')
 
@@ -87,7 +87,7 @@ def edit_resume(resume_id):
         try:
             db.session.commit()
             flash('Resume updated successfully!', 'success')
-            return redirect(url_for('forum.resumes'))
+            return redirect(url_for('CZN.resumes'))
         except:
             flash('An error occurred while updating the resume', 'error')
 
@@ -110,7 +110,7 @@ def delete_resume(resume_id):
             db.session.delete(resume)
             db.session.commit()
             flash('Resume deleted successfully!', 'success')
-            return redirect(url_for('forum.resumes'))
+            return redirect(url_for('CZN.resumes'))
         except:
             flash('An error occurred while deleting the resume', 'error')
 
