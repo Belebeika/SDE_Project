@@ -11,6 +11,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
+
     if form.validate_on_submit():
         firstname = form.firstname.data
         lastname = form.lastname.data

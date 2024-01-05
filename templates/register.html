@@ -23,6 +23,23 @@
                     <label for="{{ form.region.id }}">Регион:</label>
                     {{ form.region }}
                 </div>
+                <div class="form-phone-number">
+                    <label for="{{ form.phone_number.id }}">Номер телефона:</label>
+                    {{ form.phone_number }}
+                </div>
+                <div class="form-employer-status">
+                    {{ form.employer_status }}
+                </div>
+                {% if form.employer_status.data == True %}
+                <div class="form-workplace">
+                    <label for="{{ form.workplace.id }}">Место работы:</label>
+                    {{ form.workplace }}
+                </div>
+                <div class="form-phone-number">
+                    <label for="{{ form.post.id }}">Должность:</label>
+                    {{ form.post }}
+                </div>
+                {% endif %}
                 <div class="form-group">
                     <label for="{{ form.email.id }}">Электронная почта:</label>
                     {{ form.email }}
@@ -35,9 +52,14 @@
                     <label for="{{ form.confirm_password.id }}">Подтвердите пароль:</label>
                     {{ form.confirm_password }}
                 </div>
+                <div class="approval">
+                    {{ form.approval }}
+                </div>
+                {% if form.approval.data != True %}
                 <div class="form-group">
                     {{ form.submit }}
                 </div>
+                {% endif %}
             </form>
         </div>
     </div>

@@ -2,7 +2,7 @@
 from wtforms import PasswordField, StringField, SubmitField
 from wtforms.validators import EqualTo, Email, DataRequired, Length
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, SelectField
+from wtforms import StringField, TextAreaField, SubmitField, SelectField, BooleanField
 
 
 region_choices = [
@@ -93,10 +93,14 @@ class RegistrationForm(FlaskForm):
     lastname = StringField('Фамилия пользователя', validators=[DataRequired(), Length(min=2, max=20)])
     age = StringField('Возраст', validators=[DataRequired(), Length(min=1, max=3)])
     region = SelectField('Регион', choices=region_choices, validators=[DataRequired()])
-
+    phone_number = StringField('Номер телефона', validators=[DataRequired(), Length(min=1, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     confirm_password = PasswordField('Подтвердите пароль', validators=[DataRequired(), EqualTo('password')])
+    employer_status = BooleanField('Вы работодатель?', default=False)
+    workplace = StringField('Место работы', validators=[DataRequired(), Length(min=1, max=30)])
+    post = StringField('Должность', validators=[DataRequired(), Length(min=1, max=30)])
+    approval = BooleanField('Согласие на обработку персональных данных', default=False)
     submit = SubmitField('Зарегистрироваться')
 
 
@@ -104,7 +108,6 @@ class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     submit = SubmitField('Войти')
-
 
 
 from flask_wtf import FlaskForm
