@@ -2,7 +2,6 @@
 {% block title %}Регистрация{% endblock %}
 {% block content %}
     <div class="register-page">
-
         <div class="register-container form-container">
             <h2>Регистрация</h2>
             <form method="POST">
@@ -44,7 +43,10 @@
                 <div class="form-section">
                     <div class="form-group">
                         <label for="{{ form.employer_status.id }}">Статус работодателя:</label>
-                        {{ form.employer_status }}
+                        {{ form.employer_status(class="form-check-input") }}
+
+                        <!-- Добавлено скрытое поле для передачи значения False, если флажок не установлен -->
+                        <input type="hidden" name="{{ form.employer_status.name }}" value="false">
                     </div>
                 </div>
 

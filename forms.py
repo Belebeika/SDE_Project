@@ -13,7 +13,7 @@ class RegistrationForm(FlaskForm):
     region = SelectField('Регион', coerce=int, validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     phone_number = StringField('Номер телефона', validators=[DataRequired()])
-    employer_status = BooleanField('Статус работодателя', validators=[DataRequired()])
+    employer_status = BooleanField('Статус работодателя')
     password = PasswordField('Пароль', validators=[DataRequired()])
     confirm_password = PasswordField('Подтвердите пароль', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Зарегистрироваться')

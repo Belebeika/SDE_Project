@@ -13,7 +13,6 @@ from Model.models import Region
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-
     form.region.choices = [(region.id, region.region) for region in Region.query.all()]
 
     try:
@@ -25,7 +24,6 @@ def register():
             email = form.email.data
             phone_number = form.phone_number.data
             employer_status = form.employer_status.data
-
 
             userdb = User.query.filter_by(email=email).first()
 
@@ -41,15 +39,13 @@ def register():
             db.session.commit()
             login_user(user)
             return redirect(url_for('CZN.index'))
+
     except Exception as e:
         print(f"An error occurred in register view: {str(e)}")
         raise
 
     print(form.errors)
     return render_template('register.html', form=form)
-
-
-
 
 @auth.route('/login', methods=['POST','GET'])
 def login():

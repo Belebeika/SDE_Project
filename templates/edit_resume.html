@@ -2,32 +2,32 @@
 
 {% extends "base.html" %}
 
-{% block title %}Edit Resume - {{ resume.title }}{% endblock %}
+{% block title %}Редактирование Резюме - {{ resume.title }}{% endblock %}
 
 {% block content %}
-    <h1>Edit Resume</h1>
+    <h1>Редактирование Резюме</h1>
 
     <form method="post" action="{{ url_for('resume.edit_resume', resume_id=resume.id) }}" enctype="multipart/form-data">
-        <label for="title">Title:</label>
+        <label for="title">Заголовок:</label>
         <input type="text" name="title" value="{{ resume.title }}" required><br>
 
-        <label for="description">Description:</label>
+        <label for="description">Описание:</label>
         <textarea name="description" required>{{ resume.description }}</textarea><br>
 
-        <label for="skills">Skills:</label>
+        <label for="skills">Навыки:</label>
         <input type="text" name="skills" value="{{ resume.skills }}" required><br>
 
         <!-- Поле для загрузки нового изображения -->
-        <label for="new_image_file">New Image:</label>
+        <label for="new_image_file">Новое изображение:</label>
         <input type="file" name="new_image_file" id="new_image_file" style="display: none;" onchange="updateFileName()">
-        <button type="button" class="file-upload-btn" onclick="document.getElementById('new_image_file').click()">Choose File</button>
+        <button type="button" class="file-upload-btn" onclick="document.getElementById('new_image_file').click()">Выбрать файл</button>
         <span id="file-name"></span>
         <br>
 
-        <button type="submit">Save Changes</button>
+        <button type="submit">Сохранить изменения</button>
     </form>
 
-    <a href="{{ url_for('forum.resumes') }}">Cancel</a>
+    <a href="{{ url_for('CZN.resumes') }}">Отмена</a>
 
     <script>
         function updateFileName() {
