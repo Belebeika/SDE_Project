@@ -57,7 +57,7 @@ input, textarea {
     box-sizing: border-box;
     border: 1px solid #ccc;
     color: #fff;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     margin-top: 10px;/* Восстанавливаем отступ между элементами */
     font-size: 18px;
 }
@@ -91,12 +91,13 @@ input[type="submit"]:hover {
     background: #45003c;
     padding-right: 20px;
     padding-left: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     max-width: 400px; /* Максимальная ширина блока */
     width: 100%; /* Ширина блока 100% */
     box-sizing: border-box; /* Учтем padding в ширине */
     margin-bottom: 20px; /* Восстанавливаем отступ между блоками */
-    border: medium solid #f8ef02;
+    border: 2px solid #f8ef02;
+
 }
 
 .login-container h2, .register-container h2 {
@@ -217,10 +218,15 @@ main {
 
 .main_page_plate {
     background: #45003c;
-    color : #ffffff;
     padding : 20px;
-    border: medium solid #f8ef02;
-
+    width: 98%;
+    height: 200px;
+    background-repeat: no-repeat;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 50px;
+    overflow: hidden;
+    border: 2px solid #f8ef02;
 }
 
 .logo {
