@@ -7,34 +7,59 @@
             <h2>Регистрация</h2>
             <form method="POST">
                 {{ form.csrf_token }}
-                <div class="form-group">
-                    <label for="{{ form.firstname.id }}">Имя пользователя:</label>
-                    {{ form.firstname }}
+
+                <!-- Секция для личных данных -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="{{ form.firstname.id }}">Имя пользователя:</label>
+                        {{ form.firstname }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.lastname.id }}">Фамилия пользователя:</label>
+                        {{ form.lastname }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.age.id }}">Возраст:</label>
+                        {{ form.age }}
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="{{ form.lastname.id }}">Фамилия пользователя:</label>
-                    {{ form.lastname }}
+
+                <!-- Секция для адреса и контактных данных -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="{{ form.region.id }}">Регион:</label>
+                        {{ form.region }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.email.id }}">Электронная почта:</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.phone_number.id }}">Номер телефона:</label>
+                        {{ form.phone_number }}
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="{{ form.age.id }}">Возраст:</label>
-                    {{ form.age }}
+
+                <!-- Секция для данных о занятости -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="{{ form.employer_status.id }}">Статус работодателя:</label>
+                        {{ form.employer_status }}
+                    </div>
                 </div>
-                <div class="for_region_selection">
-                    <label for="{{ form.region.id }}">Регион:</label>
-                    {{ form.region }}
+
+                <!-- Секция для учетных данных -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="{{ form.password.id }}">Пароль:</label>
+                        {{ form.password }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.confirm_password.id }}">Подтвердите пароль:</label>
+                        {{ form.confirm_password }}
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="{{ form.email.id }}">Электронная почта:</label>
-                    {{ form.email }}
-                </div>
-                <div class="form-group">
-                    <label for="{{ form.password.id }}">Пароль:</label>
-                    {{ form.password }}
-                </div>
-                <div class="form-group">
-                    <label for="{{ form.confirm_password.id }}">Подтвердите пароль:</label>
-                    {{ form.confirm_password }}
-                </div>
+
                 <div class="form-group">
                     {{ form.submit }}
                 </div>
@@ -44,7 +69,7 @@
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="notification is-danger">
-                {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+                {{ messages[0] }}. Перейти на <a href="{{ url_for('auth.login') }}">страницу входа</a>.
             </div>
         {% endif %}
     {% endwith %}
