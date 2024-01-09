@@ -4,16 +4,15 @@ html {
 }
 
 body {
-    background: rgb(230,182,198);
-    background: linear-gradient(124deg, rgba(230,182,198,1) 0%, rgb(151, 131, 165) 52%, rgba(75,36,94,1) 100%);
+    background: #0f0000;
     color : #ffffff;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-family: "helterskelter", sans-serif;
     -webkit-background-size: cover;
 }
 
 header, footer {
     color: #fff; /* Светлый текст для блоков */
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-family: "century gothic", sans-serif;
 }
 
 a {
@@ -38,13 +37,12 @@ ul {
 }
 
 li {
-    background: #bb6868;
+    background: #800080;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-right: 30px;
     padding-left: 30px;
-    border-radius : 15px;
-    border: medium solid #9e3a3a;
+    border: medium solid #0f0000;
 }
 
 form {
@@ -53,12 +51,11 @@ form {
 }
 
 input, textarea {
-    background: rgba(50,33,59, 0.5);/* Тёмный фон для полей ввода */
+    background: #45003c;/* Тёмный фон для полей ввода */
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 5px;
     color: #fff;
     margin-bottom: 25px;
     margin-top: 10px;/* Восстанавливаем отступ между элементами */
@@ -67,17 +64,16 @@ input, textarea {
 
 input[type="submit"] {
     width: 100%;
-    background-color: #bb6868;
+    background-color: #800080;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
-    border: medium solid #9e3a3a;
-    border-radius : 10px;
+    border: medium solid #0f0000;
     font-size : 140%;
 }
 
 input[type="submit"]:hover {
-    background-color: #bb6868;
+    background-color: #800080;
 }
 
 /* Стили для страницы входа и регистрации */
@@ -91,16 +87,15 @@ input[type="submit"]:hover {
 }
 
 .login-container, .register-container {
-    background: rgba(50,33,59, 1);
+    background: #45003c;
     padding-right: 20px;
     padding-left: 20px;
     padding-bottom: 20px;
-    border-radius: 15px;
     max-width: 400px; /* Максимальная ширина блока */
     width: 100%; /* Ширина блока 100% */
     box-sizing: border-box; /* Учтем padding в ширине */
     margin-bottom: 20px; /* Восстанавливаем отступ между блоками */
-    border: medium solid #32213b;
+    border: medium solid #f8ef02;
 }
 
 .login-container h2, .register-container h2 {
@@ -114,7 +109,6 @@ input[type="submit"]:hover {
 header {
     color : #ffffff;
     padding : 10px;
-    border-radius : 15px;
     text-align: center;
 }
 
@@ -131,13 +125,13 @@ nav li {
 
 nav a {
     color: #fff;
-    font-weight: bold;
+    font-weight: lighter;
     font-size: 24px;
     transition: color 0.3s ease-in-out;
 }
 
 nav a:hover {
-    color: #32213b;
+    color: #800080;
 }
 
 /* Стили для содержимого в блоке main */
@@ -164,9 +158,8 @@ main {
 }
 
 .forum-post {
-    background-color: #32213b;
+    background-color: #45003c;
     padding: 15px;
-    border-radius: 8px;
     box-sizing: border-box;
     color: #fff;
     text-align: center;
@@ -222,11 +215,10 @@ main {
 }
 
 .main_page_plate {
-    background: rgba(50,33,59, 0.8);
+    background: #45003c;
     color : #ffffff;
     padding : 20px;
-    border-radius : 15px;
-    border: medium solid #32213b;
+    border: medium solid #f8ef02;
 
 }
 
@@ -235,20 +227,18 @@ main {
     padding-bottom : 35px;
     padding-right : 60px;
     font-size : 300%;
-    color : #bb6868;
-    font-weight : bold;
+    color : #ffffff;
+    font-weight : lighter;
 }
 
 .sign_in_up {
-    color : #bb6868;
-    font-weight : bold;
+    color : #800080;
+    font-weight : lighter;
 }
 
 .for_region_selection {
     box-sizing:border-box;
     width:100%;
-    border: 5px solid #32213b;
-    border-radius : 25px;
     padding : 15px;
 }
 
@@ -260,5 +250,5 @@ main {
 .form-delation2 {
     padding-bottom: 10px;
     font-size : 120%;
-    font-weight : bold;
+    font-weight : lighter;
 }

@@ -6,11 +6,20 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{#    <style>#}
+{#@font-face {#}
+{#    font-family: 'Blender Pro';#}
+{#    src: local('Blender Pro Book'), local('Blender-Pro-Book'),#}
+{#        url('fonts/BlenderPro-Book.ttf') format('truetype');#}
+{#    font-weight: normal;#}
+{#    font-style: normal;#}
+{#  }#}
+{#</style>#}
 </head>
 <body>
     <header>
         <nav class="main_page_plate">
-        <div class="logo">Work-Searcher</div>
+        <div class="logo">Work-Searcher By SDE</div>
         <ul>
             <li><a href="/">Домой</a></li>
             {% if not current_user.is_authenticated %}
