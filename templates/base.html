@@ -21,16 +21,16 @@
         <nav class="main_page_plate">
         <div class="logo">Work-Searcher By SDE</div>
         <ul>
-            <li><a href="/">Домой</a></li>
+            <li><a class="button" href="/">Домой</a></li>
             {% if not current_user.is_authenticated %}
-                <li><a href="/login">Войти</a></li>
-                <li><a href="/register">Регистрация</a></li>
-                <li><a href="/jobs">Вакансии</a></li>
+                <li><a class="button" href="/login">Войти</a></li>
+                <li><a class="button" href="/register">Регистрация</a></li>
+                <li><a class="button" href="/jobs">Вакансии</a></li>
             {% endif %}
             {% if current_user.is_authenticated %}
-                <li><a href="/logout">Выйти</a></li>
-                <li><a href="/jobs">Вакансии</a></li>
-                <li><a href="/resumes">Резюме</a></li>
+                <li><a class="button" href="/logout">Выйти</a></li>
+                <li><a class="button" href="/jobs">Вакансии</a></li>
+                <li><a class="button" href="/resumes">Резюме</a></li>
             {% endif %}
         </ul>
         </nav>

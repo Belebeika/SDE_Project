@@ -64,7 +64,7 @@ input, textarea {
 
 input[type="submit"] {
     width: 100%;
-    background-color: #800080;
+    background: #800080;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
@@ -73,7 +73,8 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #800080;
+    background-color: #f8ef02;
+
 }
 
 /* Стили для страницы входа и регистрации */
@@ -131,7 +132,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #800080;
+    color: #f8ef02;
 }
 
 /* Стили для содержимого в блоке main */
@@ -227,8 +228,13 @@ main {
     padding-bottom : 35px;
     padding-right : 60px;
     font-size : 300%;
-    color : #ffffff;
+    color : #f8ef02;
+    text-shadow: #bce702 2px 0px;
     font-weight : lighter;
+    text-decoration: underline;
+    text-underline-offset: 20px;
+    text-decoration-thickness: 4px;
+    text-decoration-color: #f8ef02;
 }
 
 .sign_in_up {
@@ -251,4 +257,11 @@ main {
     padding-bottom: 10px;
     font-size : 120%;
     font-weight : lighter;
+}
+
+.for_index_info {
+    color: #fff; /* Светлый текст для блоков */
+    font-family: "century gothic", sans-serif;
+    font-weight : lighter;
+    font-size : 250%;
 }
