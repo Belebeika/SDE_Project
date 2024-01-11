@@ -12,12 +12,16 @@ resume = Blueprint('resume', __name__)
 
 @resume.route('/resume/<int:resume_id>/detail')
 def detail_resume(resume_id):
-    resume = Resume.query.get(resume_id)
+    try:
+        resume = Resume.query.get(resume_id)
 
-    if not resume:
-        abort(404, description="Резюме не найдено")
+        if not resume:
+            abort(404, description="Резюме не найдено")
 
-    return render_template('detail_resume.html', resume=resume)
+        return render_template('detail_resume.html', resume=resume)
+    except Exception as e:
+        print(f"An error occurred in detail_resume view: {str(e)}")
+        raise
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}

@@ -1,13 +1,12 @@
 from flask_login import UserMixin
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
-
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(80), nullable=False)
     lastname = db.Column(db.String(80), nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    password_hash = db.Column(db.String(128))
+    password_hash = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(80), nullable=False, unique=True)
     phone_number = db.Column(db.String(20), nullable=False)
     employer_status = db.Column(db.Boolean, nullable=False)
@@ -16,16 +15,15 @@ class User(UserMixin, db.Model):
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'), nullable=False)
     region = db.relationship('Region', backref=db.backref('users', lazy=True))
 
-    @property
-    def password(self):
-        raise AttributeError('password is not a readable attribute')
-
-    @password.setter
-    def password(self, password):
+    def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def __repr__(self):
+        return f'<User {self.email}>'
+
 
 class Region(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -2,15 +2,15 @@
 
 {% extends "base.html" %}
 
-{% block title %}Delete Job{% endblock %}
+{% block title %}Удаление вакансии{% endblock %}
 
 {% block content %}
-    <h1>Delete Job</h1>
-    <p>Are you sure you want to delete the job "{{ job.title }}"?</p>
+    <h1>Удаление вакансии</h1>
+    <p>Вы уверены, что хотите удалить вакансию "{{ job.title }}"?</p>
 
     <form method="post" action="{{ url_for('job.delete_job', job_id=job.id) }}">
-        <button type="submit">Confirm Delete</button>
+        <button type="submit">Подтвердить удаление</button>
     </form>
 
-    <a href="{{ url_for('forum.jobs') }}">Cancel</a>
+    <a href="{{ url_for('CZN.jobs') }}">Отмена</a>
 {% endblock %}

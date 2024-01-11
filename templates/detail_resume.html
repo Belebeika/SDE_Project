@@ -8,7 +8,8 @@
     <p><strong>Заголовок:</strong> {{ resume.title }}</p>
     <p><strong>Описание:</strong> {{ resume.description }}</p>
     <p><strong>Навыки:</strong> {{ resume.skills }}</p>
+    <p><strong>Статус:</strong> {% if resume.status %}Одобрено{% else %}Неодобрено{% endif %}</p>
     <!-- Добавьте другие поля, если необходимо -->
 
-    <a href="{{ url_for('forum.resumes') }}">Вернуться к списку резюме</a>
+    <a href="{{ url_for('CZN.resumes') }}">Вернуться к списку резюме</a>
 {% endblock %}
