@@ -23,11 +23,11 @@ from Controller.resume import resume
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-###
-@app.errorhandler(Exception)
-def handle_exception(error):
-    return "Internal Server Error", 500
-
+#
+# @app.errorhandler(Exception)
+# def handle_exception(error):
+#     return "Internal Server Error", 500
+#
 
 from Controller import CZN, auth
 

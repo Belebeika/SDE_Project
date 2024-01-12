@@ -30,8 +30,11 @@
             {% if current_user.is_authenticated %}
                 <li><a class="button" href="/logout">Выйти</a></li>
                 <li><a class="button" href="/jobs">Вакансии</a></li>
-                <li><a class="button" href="/resumes">Резюме</a></li>
+                {% if current_user.employer_status == False %}
+                    <li><a class="button" href="/resumes">Резюме</a></li>
+                {% endif %}
             {% endif %}
+
         </ul>
         </nav>
     </header>

@@ -1,4 +1,6 @@
 from flask import request, flash, redirect, url_for, render_template, Blueprint, abort
+from sqlalchemy.exc import NoResultFound
+
 from Model.models import Job
 from app import db, app
 from werkzeug.utils import secure_filename
@@ -20,15 +22,24 @@ def init_job_blueprint(app):
     app.register_blueprint(job)
 
 
-
 @job.route('/job/<int:job_id>')
 def show_job(job_id):
-    job = Job.query.get(job_id)
+    try:
+        job = Job.query.get(job_id)
 
-    if not job:
+        if not job:
+            abort(404, description="Вакансия не найдена")
+
+        return render_template('show_job.html', job=job)
+
+    except NoResultFound:
         abort(404, description="Вакансия не найдена")
 
-    return render_template('show_job.html', job=job)
+    except Exception as e:
+        # Обработка других возможных ошибок
+
+        return render_template('error.html', error_message=str(e))
+
 
 # В вашем коде
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -38,35 +49,37 @@ def allowed_file(filename):
 @job.route("/create_job", methods=['POST', 'GET'])
 @login_required
 def create_job():
-    if request.method == 'POST':
-        title = request.form['title']
-        description = request.form['description']
-        requirements = request.form['requirements']
-        image_file = request.files['image_file']
+    try:
+        if request.method == 'POST':
+            title = request.form['title']
+            description = request.form['description']
+            requirements = request.form['requirements']
+            image_file = request.files['image_file']
 
-        # Добавляем обработку загрузки файла
-        if image_file and allowed_file(image_file.filename):
-            # Генерируем уникальное имя файла с использованием uuid
-            filename = str(uuid.uuid4()) + secure_filename(image_file.filename)
-            image_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        else:
-            filename = None
+            # Добавляем обработку загрузки файла
+            if image_file and allowed_file(image_file.filename):
+                # Генерируем уникальное имя файла с использованием uuid
+                filename = str(uuid.uuid4()) + secure_filename(image_file.filename)
+                image_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            else:
+                filename = None
 
-        # Получаем регион текущего пользователя
-        user_region = current_user.region
+            # Получаем регион текущего пользователя
 
-        # Создаем работу, устанавливая регион равным региону пользователя
-        new_job = Job(title=title, description=description, requirements=requirements, image_filename=filename, author=current_user, region=user_region)
+            # Создаем работу, устанавливая регион равным региону пользователя
+            new_job = Job(title=title, description=description, requirements=requirements, image_filename=filename, user=current_user)
 
-        try:
             db.session.add(new_job)
             db.session.commit()
             flash('Job created successfully!', 'success')
             return redirect(url_for('CZN.jobs'))
-        except:
-            flash('An error occurred while adding the job!', 'error')
+    except Exception as e:
+        error_message = f'An error occurred while adding the job: {str(e)}'
+        flash(error_message, 'error')
+        print(f"Error in create_job view: {error_message}")
 
     return render_template("create_job.html")
+
 
 def save_file(file):
     if file and allowed_file(file.filename):
@@ -92,7 +105,7 @@ def edit_job(job_id):
         return redirect(url_for('CZN.jobs'))
 
     # Проверяем, создал ли текущий пользователь эту работу
-    if job.author != current_user:
+    if job.user_id != current_user.id:
         flash('You are not authorized to edit this job', 'error')
         return redirect(url_for('CZN.jobs'))
 
@@ -128,7 +141,7 @@ def delete_job(job_id):
         return redirect(url_for('CZN.jobs'))
 
     # Проверяем, создал ли текущий пользователь эту работу
-    if job.author != current_user:
+    if job.user_id != current_user.id:
         flash('You are not authorized to delete this job', 'error')
         return redirect(url_for('CZN.jobs'))
 

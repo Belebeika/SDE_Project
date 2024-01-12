@@ -3,63 +3,15 @@
 {% block title %}Главное меню{% endblock %}
 
 {% block content %}
-    <style>
-        .job-container {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            overflow: hidden;
-        }
-        .float-left {
-              text-align: center;
-              float: right;
-            padding-right: 20%;
-        }
-
-        .job-container img {
-            max-width: 20%;
-            height: auto;
-            display: block;
-            margin: auto;
-            margin-bottom: 10px;
-            float: left;
-            border-radius : 15px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            padding-top: 10px;
-            float: right;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        select.form-control {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
 
     <h1>Тут будут вакансии!</h1>
 
     {% if current_user.is_authenticated %}
-        <a href="{{ url_for('job.create_job') }}">Create a Job</a>
+        {% if current_user.employer_status %}
+            <a href="{{ url_for('job.create_job') }}">Create a Job</a>
+        {% endif %}
     {% else %}
-        <form method="POST" action="{{ url_for('forum.jobs') }}">
+        <form method="POST" action="{{ url_for('CZN.jobs') }}">
             {{ form.hidden_tag() }}
             <div class="form-group">
                 <label for="{{ form.region.id }}">Выберите регион:</label>
@@ -76,18 +28,21 @@
             {% for job in jobs %}
                 <li class="job">
                     <div class="job-container">
-                        <h2 class = "float-left">Специальность: {{ job.title }}</h2>
+                        <h2 class="float-left">Специальность: {{ job.title }}</h2>
                         <h2 class="float-left"> Требования: {{ job.requirements }}</h2>
 
                         {% if job.image_filename %}
                             <img src="{{ url_for('static', filename='img/job_uploads/' + job.image_filename) }}" alt="{{ job.title }} Image">
                         {% endif %}
+                       <p>Статус: {% if job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
+
+
 
                         <a href="{{ url_for('job.show_job', job_id=job.id) }}">Подробнее</a>
 
-                        {% if current_user.is_authenticated and job.author == current_user %}
-                            <a href="{{ url_for('job.edit_job', job_id=job.id) }}">Edit</a>
-                            <a href="{{ url_for('job.delete_job', job_id=job.id) }}">Delete</a>
+                        {% if current_user.is_authenticated and job.user_id == current_user.id %}
+                            <a href="{{ url_for('job.edit_job', job_id=job.id) }}">Редактировать</a>
+                            <a href="{{ url_for('job.delete_job', job_id=job.id) }}">Удалить</a>
                         {% endif %}
                     </div>
                 </li>
