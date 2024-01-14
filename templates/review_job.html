@@ -1,0 +1,22 @@
+<!-- review_job.html -->
+
+{% extends "base.html" %}
+
+{% block title %}Review Job - {{ job.title }}{% endblock %}
+
+{% block content %}
+    <h1>Review Job - {{ job.title }}</h1>
+    <p>{{ job.description }}</p>
+    <p>Требования: {{ job.requirements }}</p>
+    <p>Статус: {% if job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
+
+    <form method="post" action="{{ url_for('job.approve_review_job', job_id=job.id) }}">
+        <button type="submit">Одобрить работу</button>
+    </form>
+
+    <form method="post" action="{{ url_for('job.reject_review_job', job_id=job.id) }}">
+        <button type="submit">Отклонить работу</button>
+    </form>
+
+    <a href="{{ url_for('CZN.jobs') }}">Назад к работам</a>
+{% endblock %}
