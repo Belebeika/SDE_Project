@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     post = db.Column(db.String(20))  # должность
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'), nullable=False)
     region = db.relationship('Region', backref=db.backref('users', lazy=True))
+    is_admin = db.Column(db.Boolean, default=False)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -37,7 +38,7 @@ class Resume(db.Model):
     image_filename = db.Column(db.String(300))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('resumes', lazy=True))
-    status = db.Column(db.Boolean, nullable=False, default=False)
+    status = db.Column(db.Boolean, nullable=True)
 
 
 class Job(db.Model):
@@ -48,4 +49,4 @@ class Job(db.Model):
     image_filename = db.Column(db.String(300))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('jobs', lazy=True))
-    status = db.Column(db.Boolean, nullable=False, default=False)
+    status = db.Column(db.Boolean, nullable=True)

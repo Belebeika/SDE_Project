@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Резюме в рассмотрении{% endblock %}
+
+{% block content %}
+    <h1>Резюме в рассмотрении</h1>
+
+    {% for resume in resumes %}
+        <div>
+            <p><strong>Заголовок:</strong> {{ resume.title }}</p>
+            <p><strong>Описание:</strong> {{ resume.description }}</p>
+            <p><strong>Навыки:</strong> {{ resume.skills }}</p>
+            <a href="{{ url_for('resume.detail_resume', resume_id=resume.id) }}">Подробнее</a>
+        </div>
+        <hr>
+    {% endfor %}
+
+    <a href="{{ url_for('CZN.resumes') }}">Вернуться к списку резюме</a>
+{% endblock %}

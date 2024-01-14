@@ -14,7 +14,7 @@
         <div class="resume-box">
             <h2>{{ resume.title }}</h2>
             <p>{{ resume.skills }}</p>
-            <p><strong>Статус:</strong> {% if resume.status %}Одобрено{% else %}Неодобрено{% endif %}</p>
+            <p><strong>Статус:</strong> {% if resume.status==None %}В рассмотрении{% elif resume.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
 
             <!-- Отображение изображения, если оно есть -->
             {% if resume.image_filename %}

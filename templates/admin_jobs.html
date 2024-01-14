@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Jobs{% endblock %}
+
+{% block content %}
+    <h1>Admin Jobs</h1>
+    {% if pending_jobs %}
+        <ul>
+            {% for job in pending_jobs %}
+                <li>
+                    <h2>{{ job.title }}</h2>
+                    <p>{{ job.description }}</p>
+                    <p>Требования: {{ job.requirements }}</p>
+                    <form method="post" action="{{ url_for('job.admin_approve_job', job_id=job.id) }}">
+    <button type="submit" name="approve" value="true">Одобрить</button>
+</form>
+
+                    <form method="post" action="{{ url_for('job.reject_job', job_id=job.id) }}">
+                        <button type="submit" name="reject" value="true">Отклонить</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No jobs pending review.</p>
+    {% endif %}
+
+    <a href="{{ url_for('CZN.index') }}">Back to Home</a>
+{% endblock %}

@@ -34,7 +34,8 @@
                         {% if job.image_filename %}
                             <img src="{{ url_for('static', filename='img/job_uploads/' + job.image_filename) }}" alt="{{ job.title }} Image">
                         {% endif %}
-                       <p>Статус: {% if job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
+                       <p>Статус: {% if job.status==None %}В рассмотрении{% elif job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
+
 
 
 

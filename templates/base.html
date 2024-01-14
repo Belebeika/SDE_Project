@@ -34,6 +34,12 @@
                     <li><a class="button" href="/resumes">Резюме</a></li>
                 {% endif %}
             {% endif %}
+                {% if current_user.is_authenticated and current_user.is_admin %}
+        <li><a class="button" href="{{ url_for('job.admin_jobs') }}">Рассм Вакансий</a></li>
+                            <li><a class="button" href="{{ url_for('resume.admin_pending_resumes') }}">Рассм Резюме</a></li>
+
+    {% endif %}
+
 
         </ul>
         </nav>

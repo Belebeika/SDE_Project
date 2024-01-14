@@ -156,3 +156,59 @@ def delete_job(job_id):
 
     return render_template('delete_job.html', job=job)
 
+
+
+@job.route('/job/<int:job_id>/review', methods=['GET'])
+@login_required
+def review_job(job_id):
+    job = Job.query.get(job_id)
+
+    if not job:
+        flash('Job not found', 'error')
+        return redirect(url_for('CZN.jobs'))
+
+    # Проверяем, является ли текущий пользователь администратором
+    if not current_user.is_admin:
+        flash('You are not authorized to review this job', 'error')
+        return redirect(url_for('CZN.jobs'))
+
+    return render_template('review_job.html', job=job)
+@job.route('/job/<int:job_id>/reject', methods=['GET'])
+@login_required
+def reject_job(job_id):
+    job = Job.query.get(job_id)
+
+    if not job or not current_user.is_admin:
+        abort(403)  # Возвращаем ошибку 403 Forbidden для неадминистраторов или несуществующих вакансий
+
+    job.status = False
+    db.session.commit()
+
+    flash('Job rejected successfully!', 'success')
+    return redirect(url_for('job.admin_jobs'))
+@job.route('/job/<int:job_id>/admin_approve', methods=['GET'])
+@login_required
+def admin_approve_job(job_id):
+    job = Job.query.get(job_id)
+
+    if not job or not current_user.is_admin:
+        abort(403)  # Возвращаем ошибку 403 Forbidden для неадминистраторов или несуществующих вакансий
+
+    job.status = True
+    db.session.commit()
+
+    flash('Job approve successfully!', 'success')
+    return redirect(url_for('job.admin_jobs'))
+
+@job.route('/admin/jobs', methods=['GET'])
+@login_required
+def admin_jobs():
+    # Проверяем, является ли текущий пользователь администратором
+    if not current_user.is_admin:
+        abort(403)  # Возвращаем ошибку 403 Forbidden для неадминистраторов
+
+    # Получаем все вакансии, находящиеся на рассмотрении
+    pending_jobs = Job.query.filter_by(status=None).all()
+
+    return render_template('admin_jobs.html', pending_jobs=pending_jobs)
+

@@ -97,6 +97,34 @@ def edit_resume(resume_id):
 
     return render_template('edit_resume.html', resume=resume)
 
+@resume.route('/resume/<int:resume_id>/admin_approve', methods=['POST'])
+@login_required
+def admin_approve_resume(resume_id):
+    if not current_user.is_admin:
+        abort(403)  # Отказ в доступе, если пользователь не является администратором
+
+    resume = Resume.query.get(resume_id)
+
+    if not resume:
+        abort(404, description="Резюме не найдено")
+
+    if request.method == 'POST':
+        approve_value = request.form.get('approve')  # 'true' или 'false'
+
+        if approve_value == 'true':
+            resume.status = True
+            flash('Resume approved successfully!', 'success')
+        elif approve_value == 'false':
+            resume.status = False
+            flash('Resume rejected successfully!', 'success')
+
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            flash('An error occurred while approving/rejecting the resume', 'error')
+
+    return redirect(url_for('CZN.resumes'))
 
 
 @resume.route('/resume/<int:resume_id>/delete', methods=['GET', 'POST'])
@@ -126,3 +154,12 @@ def delete_resume_image(image_filename):
         if os.path.exists(image_path):
             os.remove(image_path)
 
+@resume.route('/admin/pending_resumes')
+@login_required
+def admin_pending_resumes():
+    if not current_user.is_admin:
+        abort(403)  # Отказ в доступе, если пользователь не является администратором
+
+    pending_resumes = Resume.query.filter_by(status=None).all()
+
+    return render_template('admin_pending_resumes.html', resumes=pending_resumes)

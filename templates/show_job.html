@@ -10,6 +10,14 @@
     <p>Требования: {{ job.requirements }}</p>
     <p>Статус: {% if job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
 
+    {% if current_user.is_authenticated and current_user.is_admin %}
+        <form method="post" action="{{ url_for('job.admin_approve_job', job_id=job.id) }}">
+            <button type="submit" name="approve" value="true">Одобрить</button>
+        </form>
+        <form method="post" action="{{ url_for('job.admin_approve_job', job_id=job.id) }}">
+            <button type="submit" name="approve" value="false">Отклонить</button>
+        </form>
+    {% endif %}
 
     <a href="{{ url_for('CZN.jobs') }}">Назад к вакансиям</a>
 {% endblock %}

@@ -9,7 +9,15 @@
     <p><strong>Описание:</strong> {{ resume.description }}</p>
     <p><strong>Навыки:</strong> {{ resume.skills }}</p>
     <p><strong>Статус:</strong> {% if resume.status %}Одобрено{% else %}Неодобрено{% endif %}</p>
-    <!-- Добавьте другие поля, если необходимо -->
+        {% if current_user.is_authenticated and current_user.is_admin %}
+        <form method="post" action="{{ url_for('resume.admin_approve_resume', resume_id=resume.id) }}">
+            <button type="submit" name="approve" value="true">Одобрить</button>
+        </form>
+        <form method="post" action="{{ url_for('resume.admin_approve_resume', resume_id=resume.id) }}">
+            <button type="submit" name="approve" value="false">Отклонить</button>
+        </form>
+    {% endif %}
+
 
     <a href="{{ url_for('CZN.resumes') }}">Вернуться к списку резюме</a>
 {% endblock %}

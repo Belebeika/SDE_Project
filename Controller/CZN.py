@@ -10,6 +10,8 @@ CZN = Blueprint('CZN', __name__)
 def index():
     title = 'Главное меню'
     return render_template('index.html', title=title)
+
+
 @CZN.route("/jobs", methods=['GET', 'POST'])
 def jobs():
         # Проверяем, залогинен ли пользователь
@@ -18,7 +20,12 @@ def jobs():
             selected_region = Region.query.get(current_user.region_id)
 
             # Если пользователь залогинен, отображаем вакансии без формы
-            jobs = Job.query.all()
+            if current_user.is_authenticated:
+                if current_user.is_admin:
+                    jobs = Job.query.all()
+                else:
+                    jobs = Job.query.filter_by(status=True).all()
+
             return render_template('jobs.html', jobs=reversed(jobs), selected_region=selected_region)
 
         # Если пользователь анонимный, отображаем форму выбора региона
