@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Личный кабинет{% endblock %}
+{% block content %}
+    <h1>Добро пожаловать, {{ current_user.firstname }} {{ current_user.lastname }}!</h1>
+    <p>Ваш email: {{ current_user.email }}</p>
+    <p>Ваш номер телефона: {{ current_user.phone_number }}</p>
+    <p>Ваш регион: {{ current_user.region.region }}</p>
+
+    {% if current_user.is_admin %}
+        <!-- Здесь может быть ваш код для панели админа -->
+        <h2>Вы администратор</h2>
+    {% elif current_user.employer_status %}
+        <!-- Здесь может быть ваш код для панели работодателя -->
+        <h2>Вы работодатель</h2>
+    {% else %}
+        <!-- Здесь может быть ваш код для панели работника -->
+        <h2>Вы работник</h2>
+    {% endif %}
+{% endblock %}

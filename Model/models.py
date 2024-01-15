@@ -1,6 +1,8 @@
 from flask_login import UserMixin
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
+
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(80), nullable=False)
@@ -29,6 +31,7 @@ class User(UserMixin, db.Model):
 class Region(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     region = db.Column(db.String(50), nullable=False)
+
 
 class Resume(db.Model):
     id = db.Column(db.Integer, primary_key=True)

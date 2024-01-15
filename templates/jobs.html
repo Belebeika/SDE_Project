@@ -3,23 +3,38 @@
 {% block title %}Главное меню{% endblock %}
 
 {% block content %}
-
-    <h1>Тут будут вакансии!</h1>
+    <h1>Вакансии</h1>
 
     {% if current_user.is_authenticated %}
         {% if current_user.employer_status %}
             <a href="{{ url_for('job.create_job') }}">Create a Job</a>
         {% endif %}
+        {% if current_user.is_admin %}
+            <form method="GET" action="{{ url_for('CZN.jobs') }}">
+                <select name="status">
+                    <option value="all">Все вакансии</option>
+                    <option value="pending">В рассмотрении</option>
+                    <option value="approved">Одобрены</option>
+                    <option value="rejected">Не одобрены</option>
+                </select>
+                <select name="region">
+                    <option value="all">Все регионы</option>
+                    {% for region in regions %}
+                        <option value="{{ region.id }}">{{ region.region }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Фильтровать">
+            </form>
+        {% endif %}
     {% else %}
-        <form method="POST" action="{{ url_for('CZN.jobs') }}">
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                <label for="{{ form.region.id }}">Выберите регион:</label>
-                {{ form.region(class="for_region_selection") }}
-            </div>
-            <div class="form-group">
-                {{ form.submit }}
-            </div>
+        <form method="GET" action="{{ url_for('CZN.jobs') }}">
+            <select name="region">
+                <option value="all">Все регионы</option>
+                {% for region in regions %}
+                    <option value="{{ region.id }}">{{ region.region }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Фильтровать">
         </form>
     {% endif %}
 
@@ -35,9 +50,6 @@
                             <img src="{{ url_for('static', filename='img/job_uploads/' + job.image_filename) }}" alt="{{ job.title }} Image">
                         {% endif %}
                        <p>Статус: {% if job.status==None %}В рассмотрении{% elif job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
-
-
-
 
                         <a href="{{ url_for('job.show_job', job_id=job.id) }}">Подробнее</a>
 

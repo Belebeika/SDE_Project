@@ -23,22 +23,19 @@
         <ul>
             <li><a class="button" href="/">Домой</a></li>
             {% if not current_user.is_authenticated %}
-                <li><a class="button" href="/login">Войти</a></li>
-                <li><a class="button" href="/register">Регистрация</a></li>
                 <li><a class="button" href="/jobs">Вакансии</a></li>
+                 <li><a class="button" href="/login">Войти</a></li>
+                <li><a class="button" href="/register">Регистрация</a></li>
             {% endif %}
             {% if current_user.is_authenticated %}
-                <li><a class="button" href="/logout">Выйти</a></li>
                 <li><a class="button" href="/jobs">Вакансии</a></li>
-                {% if current_user.employer_status == False %}
+                {% if current_user.employer_status == False or current_user.is_admin %}
                     <li><a class="button" href="/resumes">Резюме</a></li>
                 {% endif %}
-            {% endif %}
-                {% if current_user.is_authenticated and current_user.is_admin %}
-        <li><a class="button" href="{{ url_for('job.admin_jobs') }}">Рассм Вакансий</a></li>
-                            <li><a class="button" href="{{ url_for('resume.admin_pending_resumes') }}">Рассм Резюме</a></li>
+            <li><a class="button" href="{{ url_for('CZN.dashboard') }}"> Личный кабинет</a></li>
+                <li><a class="button" href="/logout">Выйти</a></li>
+        {% endif %}
 
-    {% endif %}
 
 
         </ul>

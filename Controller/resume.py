@@ -163,3 +163,5 @@ def admin_pending_resumes():
     pending_resumes = Resume.query.filter_by(status=None).all()
 
     return render_template('admin_pending_resumes.html', resumes=pending_resumes)
+
+

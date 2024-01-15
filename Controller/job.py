@@ -173,32 +173,44 @@ def review_job(job_id):
         return redirect(url_for('CZN.jobs'))
 
     return render_template('review_job.html', job=job)
-@job.route('/job/<int:job_id>/reject', methods=['GET'])
+@job.route('/job/<int:job_id>/reject', methods=['POST'])
 @login_required
 def reject_job(job_id):
+    if not current_user.is_admin:
+        abort(403)  # Отказ в доступе, если пользователь не является администратором
+
     job = Job.query.get(job_id)
 
-    if not job or not current_user.is_admin:
-        abort(403)  # Возвращаем ошибку 403 Forbidden для неадминистраторов или несуществующих вакансий
+    if not job:
+        abort(404, description="Вакансия не найдена")
 
-    job.status = False
-    db.session.commit()
+    if request.method == 'POST':
+        job.status = False
+        db.session.commit()
 
-    flash('Job rejected successfully!', 'success')
+        flash('Job rejected successfully!', 'success')
+
     return redirect(url_for('job.admin_jobs'))
-@job.route('/job/<int:job_id>/admin_approve', methods=['GET'])
+
+@job.route('/job/<int:job_id>/admin_approve', methods=['POST'])
 @login_required
 def admin_approve_job(job_id):
+    if not current_user.is_admin:
+        abort(403)  # Отказ в доступе, если пользователь не является администратором
+
     job = Job.query.get(job_id)
 
-    if not job or not current_user.is_admin:
-        abort(403)  # Возвращаем ошибку 403 Forbidden для неадминистраторов или несуществующих вакансий
+    if not job:
+        abort(404, description="Вакансия не найдена")
 
-    job.status = True
-    db.session.commit()
+    if request.method == 'POST':
+        job.status = True
+        db.session.commit()
 
-    flash('Job approve successfully!', 'success')
+        flash('Job approved successfully!', 'success')
+
     return redirect(url_for('job.admin_jobs'))
+
 
 @job.route('/admin/jobs', methods=['GET'])
 @login_required
