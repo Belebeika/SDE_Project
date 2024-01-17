@@ -18,6 +18,21 @@
         </form>
     {% endif %}
 
+    {% if is_employer %}
+        <h2>Данные пользователя</h2>
+        <p>Имя: {{ resume.user.firstname }}</p>
+        <p>Фамилия: {{ resume.user.lastname }}</p>
+        <p>Email: {{ resume.user.email }}</p>
+        <p>Телефон: {{ resume.user.phone_number }}</p>
+        <p>Место работы: {{ resume.user.workplace }}</p>
+        <p>Должность: {{ resume.user.post }}</p>
+        {# Добавьте другие данные пользователя, которые вам необходимы #}
+    {% endif %}
 
-    <a href="{{ url_for('CZN.resumes') }}">Вернуться к списку резюме</a>
+    {% if not current_user.employer_status or current_user.is_admin %}
+        <a href="{{ url_for('CZN.resumes') }}">Вернуться к списку резюме</a>
+    {% else %}
+        <a href="{{ url_for('CZN.jobs') }}">Вернуться к списку вакансий</a>
+    {% endif %}
+
 {% endblock %}

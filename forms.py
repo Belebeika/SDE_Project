@@ -1,5 +1,6 @@
 #forms.py
-from wtforms import PasswordField, StringField, SubmitField, BooleanField
+from flask_wtf.file import FileAllowed
+from wtforms import PasswordField, StringField, SubmitField, BooleanField, FileField, SelectMultipleField
 from wtforms.validators import EqualTo, Email, DataRequired, Length
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, SelectField
@@ -38,4 +39,7 @@ class RegionForm(FlaskForm):
     submit = SubmitField('Показать вакансии')
 
 
+class ApplyJobForm(FlaskForm):
+    resumes = SelectMultipleField('Выбрать резюме', coerce=int)
+    submit = SubmitField('Прикрепить')
 

@@ -1,7 +1,7 @@
 from flask import request, flash, redirect, url_for, render_template, Blueprint, abort
 from sqlalchemy.exc import NoResultFound
 
-from Model.models import Job
+from Model.models import Job, Resume
 from app import db, app
 from werkzeug.utils import secure_filename
 import os  # Добавляем импорт для работы с файлами
@@ -11,41 +11,58 @@ from flask_login import login_required, current_user
 
 import uuid
 
+from forms import ApplyJobForm
+
 UPLOAD_FOLDER = 'static/img/job_uploads'
 app.config['UPLOAD_FOLDER'] = 'static/img/job_uploads'
 
 
-
 job = Blueprint('job', __name__)
+
 
 def init_job_blueprint(app):
     app.register_blueprint(job)
 
 
-@job.route('/job/<int:job_id>')
+@job.route('/job/<int:job_id>', methods=['GET', 'POST'])
+@login_required
 def show_job(job_id):
-    try:
-        job = Job.query.get(job_id)
+    job = Job.query.get(job_id)
 
-        if not job:
-            abort(404, description="Вакансия не найдена")
-
-        return render_template('show_job.html', job=job)
-
-    except NoResultFound:
+    if not job:
         abort(404, description="Вакансия не найдена")
 
-    except Exception as e:
-        # Обработка других возможных ошибок
+    apply_form = ApplyJobForm()
+    apply_form.resumes.choices = [(r.id, r.title) for r in current_user.resumes if r.status]
 
-        return render_template('error.html', error_message=str(e))
+    if apply_form.validate_on_submit():
+        selected_resumes_ids = apply_form.resumes.data
+
+        # Проверяем, не прикреплено ли уже выбранное резюме к вакансии
+        existing_resumes = [resume for resume in job.resumes if resume.id in selected_resumes_ids]
+
+        if existing_resumes:
+            flash('Резюме уже прикреплено к этой вакансии!', 'error')
+        else:
+            selected_resumes = Resume.query.filter(Resume.id.in_(selected_resumes_ids)).all()
+            job.resumes.extend(selected_resumes)
+            db.session.commit()
+            flash('Резюме успешно прикреплены к вакансии!', 'success')
+
+    # Получаем все резюме, связанные с текущей вакансией
+    job_resumes = job.resumes
+
+    return render_template('show_job.html', job=job, apply_form=apply_form, job_resumes=job_resumes)
 
 
 # В вашем коде
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 @job.route("/create_job", methods=['POST', 'GET'])
 @login_required
 def create_job():
@@ -89,11 +106,13 @@ def save_file(file):
         return filename
     return None
 
+
 def delete_file(filename):
     if filename:
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         if os.path.exists(file_path):
             os.remove(file_path)
+
 
 @job.route('/job/<int:job_id>/edit', methods=['GET', 'POST'])
 @login_required
@@ -130,7 +149,6 @@ def edit_job(job_id):
     return render_template('edit_job.html', job=job)
 
 
-
 @job.route('/job/<int:job_id>/delete', methods=['GET', 'POST'])
 @login_required
 def delete_job(job_id):
@@ -157,7 +175,6 @@ def delete_job(job_id):
     return render_template('delete_job.html', job=job)
 
 
-
 @job.route('/job/<int:job_id>/review', methods=['GET'])
 @login_required
 def review_job(job_id):
@@ -173,6 +190,8 @@ def review_job(job_id):
         return redirect(url_for('CZN.jobs'))
 
     return render_template('review_job.html', job=job)
+
+
 @job.route('/job/<int:job_id>/reject', methods=['POST'])
 @login_required
 def reject_job(job_id):
@@ -191,6 +210,7 @@ def reject_job(job_id):
         flash('Job rejected successfully!', 'success')
 
     return redirect(url_for('job.admin_jobs'))
+
 
 @job.route('/job/<int:job_id>/admin_approve', methods=['POST'])
 @login_required

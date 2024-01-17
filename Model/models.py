@@ -33,6 +33,7 @@ class Region(db.Model):
     region = db.Column(db.String(50), nullable=False)
 
 
+
 class Resume(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(300), nullable=False)
@@ -44,6 +45,13 @@ class Resume(db.Model):
     status = db.Column(db.Boolean, nullable=True)
 
 
+job_resume_association = db.Table(
+    'job_resume_association',
+    db.Column('job_id', db.Integer, db.ForeignKey('job.id')),
+    db.Column('resume_id', db.Integer, db.ForeignKey('resume.id'))
+)
+
+
 class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(300), nullable=False)
@@ -53,3 +61,10 @@ class Job(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('jobs', lazy=True))
     status = db.Column(db.Boolean, nullable=True)
+    resumes = db.relationship('Resume', secondary=job_resume_association, backref=db.backref('jobs', lazy=True))
+
+
+
+
+
+

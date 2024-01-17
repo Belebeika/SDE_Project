@@ -10,7 +10,9 @@ import uuid
 
 resume = Blueprint('resume', __name__)
 
+
 @resume.route('/resume/<int:resume_id>/detail')
+@login_required
 def detail_resume(resume_id):
     try:
         resume = Resume.query.get(resume_id)
@@ -18,10 +20,14 @@ def detail_resume(resume_id):
         if not resume:
             abort(404, description="Резюме не найдено")
 
-        return render_template('detail_resume.html', resume=resume)
+        # Проверяем, является ли текущий пользователь работодателем
+        is_employer = current_user.is_authenticated and current_user.employer_status
+
+        return render_template('detail_resume.html', resume=resume, is_employer=is_employer)
     except Exception as e:
         print(f"An error occurred in detail_resume view: {str(e)}")
         raise
+
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}

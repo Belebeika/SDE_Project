@@ -7,7 +7,7 @@
 
     {% if current_user.is_authenticated %}
         {% if current_user.employer_status %}
-            <a href="{{ url_for('job.create_job') }}">Create a Job</a>
+            <a href="{{ url_for('job.create_job') }}">Создать вакансию</a>
         {% endif %}
         {% if current_user.is_admin %}
             <form method="GET" action="{{ url_for('CZN.jobs') }}">

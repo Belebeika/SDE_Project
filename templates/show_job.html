@@ -1,4 +1,4 @@
-<!-- show_job.html -->
+<!-- Ваш файл show_job.html -->
 
 {% extends "base.html" %}
 
@@ -10,13 +10,31 @@
     <p>Требования: {{ job.requirements }}</p>
     <p>Статус: {% if job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
 
-    {% if current_user.is_authenticated and current_user.is_admin %}
-        <form method="post" action="{{ url_for('job.admin_approve_job', job_id=job.id) }}">
-            <button type="submit" name="approve" value="true">Одобрить</button>
+    {% if current_user.is_authenticated and not current_user.is_admin and not current_user.employer_status %}
+        <h2>Прикрепление резюме</h2>
+        <form method="post" action="{{ url_for('job.show_job', job_id=job.id) }}">
+            {{ apply_form.hidden_tag() }}
+            {{ apply_form.resumes.label }}: {{ apply_form.resumes() }}<br> {# Добавлено поле выбора резюме #}
+            <input type="submit" value="Прикрепить">
         </form>
-        <form method="post" action="{{ url_for('job.admin_approve_job', job_id=job.id) }}">
-            <button type="submit" name="approve" value="false">Отклонить</button>
-        </form>
+    {% endif %}
+
+    {% if current_user.is_authenticated and job.user_id == current_user.id %}
+    <h2>Resumes for this Job</h2>
+    {% if job_resumes %}
+        <ul>
+            {% for resume in job_resumes %}
+                <li>
+                    <a href="{{ url_for('resume.detail_resume', resume_id=resume.id) }}">
+                        {{ resume.title }} - {{ resume.user.firstname }} {{ resume.user.lastname }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>No resumes submitted for this job.</p>
+        {% endif %}
     {% endif %}
 
     <a href="{{ url_for('CZN.jobs') }}">Назад к вакансиям</a>
