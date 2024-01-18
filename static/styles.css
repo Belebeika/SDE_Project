@@ -350,3 +350,24 @@ main {
 .job_content:hover {
     color: #f8ef02;
 }
+
+.dashboard {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size : 200%;
+    font-family: "century gothic", sans-serif;
+    font-weight : lighter;
+}
+
+  .form-group {
+            margin-bottom: 15px;
+        }
+
+
+.form-container {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
