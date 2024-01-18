@@ -5,11 +5,12 @@
 {% block title %}{{ job.title }}{% endblock %}
 
 {% block content %}
-    <h1>{{ job.title }}</h1>
+    <div class = "dashboard">
+    <p>{{ job.title }}</p>
     <p>{{ job.description }}</p>
     <p>Требования: {{ job.requirements }}</p>
     <p>Статус: {% if job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
-
+    </div>
     {% if current_user.is_authenticated and not current_user.is_admin and not current_user.employer_status %}
         <h2>Прикрепление резюме</h2>
         <form method="post" action="{{ url_for('job.show_job', job_id=job.id) }}">

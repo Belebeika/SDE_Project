@@ -3,62 +3,61 @@
 {% block title %}Главное меню{% endblock %}
 
 {% block content %}
-    <h1>Вакансии</h1>
+    <h1 class ="job_creation_logo2">Вакансии</h1>
 
     {% if current_user.is_authenticated %}
-        {% if current_user.employer_status %}
-            <a href="{{ url_for('job.create_job') }}">Создать вакансию</a>
+        {% if current_user.employer_status and not current_user.is_admin %}
+            <a href="{{ url_for('job.create_job') }}" class="job_creation_logo">Создать вакансию</a>
         {% endif %}
         {% if current_user.is_admin %}
-            <form method="GET" action="{{ url_for('CZN.jobs') }}">
-                <select name="status">
-                    <option value="all">Все вакансии</option>
-                    <option value="pending">В рассмотрении</option>
-                    <option value="approved">Одобрены</option>
-                    <option value="rejected">Не одобрены</option>
-                </select>
-                <select name="region">
-                    <option value="all">Все регионы</option>
-                    {% for region in regions %}
-                        <option value="{{ region.id }}">{{ region.region }}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit" value="Фильтровать">
-            </form>
-        {% endif %}
+    <form method="GET" action="{{ url_for('CZN.jobs') }}" class="filter-form">
+        <select name="status" class="filter-select">
+            <option value="all">Все вакансии</option>
+            <option value="pending">В рассмотрении</option>
+            <option value="approved">Одобрены</option>
+            <option value="rejected">Не одобрены</option>
+        </select>
+        <select name="region" class="filter-select">
+            <option value="all">Все регионы</option>
+            {% for region in regions %}
+                <option value="{{ region.id }}">{{ region.region }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Фильтровать" class="filter-submit">
+    </form>
+{% endif %}
+
     {% else %}
         <form method="GET" action="{{ url_for('CZN.jobs') }}">
-            <select name="region">
+            <select name="region" class="filter-select">
                 <option value="all">Все регионы</option>
                 {% for region in regions %}
                     <option value="{{ region.id }}">{{ region.region }}</option>
                 {% endfor %}
             </select>
-            <input type="submit" value="Фильтровать">
+            <input type="submit" value="Фильтровать" class = "filter-submit">
         </form>
     {% endif %}
 
     {% if jobs %}
         <ul>
             {% for job in jobs %}
-                <li class="job">
-                    <div class="job-container">
-                        <h2 class="float-left">Специальность: {{ job.title }}</h2>
-                        <h2 class="float-left"> Требования: {{ job.requirements }}</h2>
 
-                        {% if job.image_filename %}
-                            <img src="{{ url_for('static', filename='img/job_uploads/' + job.image_filename) }}" alt="{{ job.title }} Image">
-                        {% endif %}
-                       <p>Статус: {% if job.status==None %}В рассмотрении{% elif job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
+                <div class="job_plate">
+                     {% if job.image_filename %}
+                        <img src="{{ url_for('static', filename='img/job_uploads/' + job.image_filename) }}" alt="{{ job.title }} Image" class = "job_img">
+                    {% endif %}
+                    <h2 class="job_content">Специальность: {{ job.title }}</h2>
+                    <h2 class="job_content"> Требования: {{ job.requirements }}</h2>
+                   <h2 class="job_content">Статус: {% if job.status==None %}В рассмотрении{% elif job.status %}Одобрена{% else %}Неодобрена{% endif %}</h2>
 
-                        <a href="{{ url_for('job.show_job', job_id=job.id) }}">Подробнее</a>
+                    <a href="{{ url_for('job.show_job', job_id=job.id) }}" class = "job_content">Подробнее</a>
 
-                        {% if current_user.is_authenticated and job.user_id == current_user.id %}
-                            <a href="{{ url_for('job.edit_job', job_id=job.id) }}">Редактировать</a>
-                            <a href="{{ url_for('job.delete_job', job_id=job.id) }}">Удалить</a>
-                        {% endif %}
-                    </div>
-                </li>
+                    {% if current_user.is_authenticated and job.user_id == current_user.id %}
+                        <a href="{{ url_for('job.edit_job', job_id=job.id) }}" class="job_content">Редактировать </a>
+                        <a href="{{ url_for('job.delete_job', job_id=job.id) }}" class="job_content">Удалить</a>
+                    {% endif %}
+                </div>
             {% endfor %}
         </ul>
     {% else %}

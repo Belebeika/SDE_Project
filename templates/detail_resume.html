@@ -3,7 +3,8 @@
 {% block title %}Подробная информация о резюме{% endblock %}
 
 {% block content %}
-    <h1>Подробная информация о резюме</h1>
+    <div class = "dashboard">
+    <h4>Подробная информация о резюме</h4>
 
     <p><strong>Заголовок:</strong> {{ resume.title }}</p>
     <p><strong>Описание:</strong> {{ resume.description }}</p>
@@ -11,15 +12,15 @@
     <p><strong>Статус:</strong> {% if resume.status %}Одобрено{% else %}Неодобрено{% endif %}</p>
         {% if current_user.is_authenticated and current_user.is_admin %}
         <form method="post" action="{{ url_for('resume.admin_approve_resume', resume_id=resume.id) }}">
-            <button type="submit" name="approve" value="true">Одобрить</button>
+            <button type="submit" name="approve" value="true" class = "microbutton">Одобрить</button>
         </form>
         <form method="post" action="{{ url_for('resume.admin_approve_resume', resume_id=resume.id) }}">
-            <button type="submit" name="approve" value="false">Отклонить</button>
+            <button type="submit" name="approve" value="false" class = "microbutton">Отклонить</button>
         </form>
     {% endif %}
 
     {% if is_employer %}
-        <h2>Данные пользователя</h2>
+        <h4>Данные пользователя</h4>
         <p>Имя: {{ resume.user.firstname }}</p>
         <p>Фамилия: {{ resume.user.lastname }}</p>
         <p>Email: {{ resume.user.email }}</p>
@@ -34,5 +35,5 @@
     {% else %}
         <a href="{{ url_for('CZN.jobs') }}">Вернуться к списку вакансий</a>
     {% endif %}
-
+    </div>
 {% endblock %}

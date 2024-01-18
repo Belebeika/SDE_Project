@@ -33,27 +33,31 @@ def jobs():
             if selected_region_id != 'all':
                 # Фильтруем вакансии по выбранному региону и статусу
                 if status == 'pending':
-                    jobs = Job.query.join(User).filter(User.region_id==selected_region_id, (Job.status==None) | (Job.user_id==current_user.id)).all()
+                    jobs = Job.query.join(User).filter(User.region_id==selected_region_id, (Job.status==None)).all()
                 elif status == 'approved':
-                    jobs = Job.query.join(User).filter(User.region_id==selected_region_id, (Job.status==True) | (Job.user_id==current_user.id)).all()
+                    jobs = Job.query.join(User).filter(User.region_id==selected_region_id, (Job.status==True)).all()
                 elif status == 'rejected':
-                    jobs = Job.query.join(User).filter(User.region_id==selected_region_id, (Job.status==False) | (Job.user_id==current_user.id)).all()
+                    jobs = Job.query.join(User).filter(User.region_id==selected_region_id, (Job.status==False)).all()
                 else:
-                    jobs = Job.query.join(User).filter(User.region_id==selected_region_id, (Job.user_id==current_user.id)).all()
+                    jobs = Job.query.join(User).filter(User.region_id==selected_region_id).all()
             # Если выбраны все регионы
             else:
+                # Фильтруем вакансии по статусу, показывая все вакансии
                 if status == 'pending':
-                    jobs = Job.query.join(User).filter((Job.status==None) | (Job.user_id==current_user.id)).all()
+                    jobs = Job.query.join(User).filter((Job.status==None)).all()
                 elif status == 'approved':
-                    jobs = Job.query.join(User).filter((Job.status==True) | (Job.user_id==current_user.id)).all()
+                    jobs = Job.query.join(User).filter((Job.status==True)).all()
                 elif status == 'rejected':
-                    jobs = Job.query.join(User).filter((Job.status==False) | (Job.user_id==current_user.id)).all()
+                    jobs = Job.query.join(User).filter((Job.status==False)).all()
                 else:
-                    jobs = Job.query.join(User).filter((Job.user_id==current_user.id)).all()
+                    jobs = Job.query.all()
         # Если пользователь не админ
         else:
             # Фильтруем вакансии, показывая только одобренные и те, которые создал текущий пользователь
-            jobs = Job.query.filter((Job.status==True) | (Job.user_id==current_user.id)).all()
+            if selected_region_id != 'all':
+                jobs = Job.query.join(User).filter(User.region_id==selected_region_id, (Job.status==True)).all()
+            else:
+                jobs = Job.query.filter((Job.status==True) | (Job.user_id==current_user.id)).all()
 
         # Получаем объект региона текущего пользователя
         selected_region = Region.query.get(current_user.region_id)
@@ -62,7 +66,7 @@ def jobs():
     else:
         if selected_region_id != 'all':
             # Фильтруем вакансии по выбранному региону
-            jobs = Job.query.join(User).filter(User.region_id==selected_region_id, Job.status==True).all()
+            jobs = Job.query.join(User).filter(User.region_id==selected_region_id, (Job.status==True)).all()
         else:
             # Показываем только одобренные вакансии
             jobs = Job.query.filter_by(status=True).all()
