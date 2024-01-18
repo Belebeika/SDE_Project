@@ -296,7 +296,7 @@ main {
     border: medium solid #0f0000;
     font-size : 90%;
 }
-.microbutton {
+.microbutton:hover {
     background : #f8ef02;
 }
 
@@ -344,14 +344,13 @@ main {
     font-weight : lighter;
     float:left;
     margin: 30px 40px 0px 0;
-
 }
 
 .job_content:hover {
     color: #f8ef02;
 }
 
-.dashboard {
+    .dashboard {
     margin-top: 10px;
     margin-bottom: 10px;
     color: #ffffff;
@@ -379,7 +378,6 @@ main {
 }
 
 .filter-select {
-    
     padding: 8px;
     margin-right: 10px;
 }
@@ -395,4 +393,8 @@ main {
 
 .filter-submit:hover {
     background-color: #45a049; /* Измененный цвет фона при наведении курсора */
+}
+
+.for_filter_floating {
+    float : left;
 }

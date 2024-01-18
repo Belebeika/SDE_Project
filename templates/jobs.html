@@ -29,13 +29,13 @@
 
     {% else %}
         <form method="GET" action="{{ url_for('CZN.jobs') }}">
-            <select name="region">
+            <select name="region" class="filter-select">
                 <option value="all">Все регионы</option>
                 {% for region in regions %}
                     <option value="{{ region.id }}">{{ region.region }}</option>
                 {% endfor %}
             </select>
-            <input type="submit" value="Фильтровать">
+            <input type="submit" value="Фильтровать" class = "filter-submit">
         </form>
     {% endif %}
 
