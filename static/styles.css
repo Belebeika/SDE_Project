@@ -129,7 +129,6 @@ nav a {
     color: #fff;
     font-weight: lighter;
     font-size: 24px;
-    transition: color 0.3s ease-in-out;
 }
 
 nav a:hover {
@@ -270,4 +269,84 @@ main {
     font-family: "century gothic", sans-serif;
     font-weight : lighter;
     font-size : 250%;
+}
+
+.for_other_buttons {
+    width: 30%;
+    background: #800080;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    border: medium solid #0f0000;
+    font-size : 140%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+}
+.for_other_buttons:hover {
+    background : #f8ef02;
+}
+
+.microbutton {
+    width: 10%;
+    background: #800080;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    border: medium solid #0f0000;
+    font-size : 90%;
+}
+.microbutton {
+    background : #f8ef02;
+}
+
+.job_creation_logo {
+    margin-top: 15px;
+    color: #f8ef02;
+    font-size : 140%;
+    font-family: "century gothic", sans-serif;
+}
+
+.job_creation_logo2 {
+    margin-top: 3px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size : 300%;
+    font-family: "century gothic", sans-serif;
+    font-weight : lighter;
+}
+
+.job_plate {
+    background: #45003c;
+    padding : 10px;
+    width: 98%;
+    height: 120px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    border: 2px solid #f8ef02;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+
+.job_img {
+    float:left; /* Выравнивание по левому краю */
+    margin: 5px 100px 0px 15px;
+    width: 110px;
+    height: 110px;
+    border: 2px solid #0f0000;
+}
+
+.job_content {
+    color: #ffffff;
+    font-size : 150%;
+    font-family: "century gothic", sans-serif;
+    font-weight : lighter;
+    float:left;
+    margin: 30px 40px 0px 0;
+
+}
+
+.job_content:hover {
+    color: #f8ef02;
 }
