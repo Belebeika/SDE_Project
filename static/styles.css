@@ -371,3 +371,28 @@ main {
     margin-bottom: 10px;
     box-sizing: border-box;
 }
+
+
+.filter-form {
+    display: flex;
+    align-items: center;
+}
+
+.filter-select {
+    
+    padding: 8px;
+    margin-right: 10px;
+}
+
+.filter-submit {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50; /* Цвет фона */
+    color: white; /* Цвет текста */
+    border: none; /* Убираем границу */
+    cursor: pointer;
+}
+
+.filter-submit:hover {
+    background-color: #45a049; /* Измененный цвет фона при наведении курсора */
+}

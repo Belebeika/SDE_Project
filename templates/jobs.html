@@ -6,26 +6,27 @@
     <h1 class ="job_creation_logo2">Вакансии</h1>
 
     {% if current_user.is_authenticated %}
-        {% if current_user.employer_status %}
+        {% if current_user.employer_status and not current_user.is_admin %}
             <a href="{{ url_for('job.create_job') }}" class="job_creation_logo">Создать вакансию</a>
         {% endif %}
         {% if current_user.is_admin %}
-            <form method="GET" action="{{ url_for('CZN.jobs') }}">
-                <select name="status">
-                    <option value="all">Все вакансии</option>
-                    <option value="pending">В рассмотрении</option>
-                    <option value="approved">Одобрены</option>
-                    <option value="rejected">Не одобрены</option>
-                </select>
-                <select name="region">
-                    <option value="all">Все регионы</option>
-                    {% for region in regions %}
-                        <option value="{{ region.id }}">{{ region.region }}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit" value="Фильтровать">
-            </form>
-        {% endif %}
+    <form method="GET" action="{{ url_for('CZN.jobs') }}" class="filter-form">
+        <select name="status" class="filter-select">
+            <option value="all">Все вакансии</option>
+            <option value="pending">В рассмотрении</option>
+            <option value="approved">Одобрены</option>
+            <option value="rejected">Не одобрены</option>
+        </select>
+        <select name="region" class="filter-select">
+            <option value="all">Все регионы</option>
+            {% for region in regions %}
+                <option value="{{ region.id }}">{{ region.region }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Фильтровать" class="filter-submit">
+    </form>
+{% endif %}
+
     {% else %}
         <form method="GET" action="{{ url_for('CZN.jobs') }}">
             <select name="region">
