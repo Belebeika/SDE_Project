@@ -6,7 +6,7 @@
     <h1>Вакансии</h1>
 
     {% if current_user.is_authenticated %}
-        {% if current_user.employer_status %}
+        {% if current_user.employer_status and not current_user.is_admin%}
             <a href="{{ url_for('job.create_job') }}">Создать вакансию</a>
         {% endif %}
         {% if current_user.is_admin %}

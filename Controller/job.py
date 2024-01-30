@@ -209,7 +209,7 @@ def reject_job(job_id):
 
         flash('Job rejected successfully!', 'success')
 
-    return redirect(url_for('job.admin_jobs'))
+    return redirect(url_for('CZN.jobs'))
 
 
 @job.route('/job/<int:job_id>/admin_approve', methods=['POST'])
@@ -229,18 +229,7 @@ def admin_approve_job(job_id):
 
         flash('Job approved successfully!', 'success')
 
-    return redirect(url_for('job.admin_jobs'))
+    return redirect(url_for('CZN.jobs'))
 
 
-@job.route('/admin/jobs', methods=['GET'])
-@login_required
-def admin_jobs():
-    # Проверяем, является ли текущий пользователь администратором
-    if not current_user.is_admin:
-        abort(403)  # Возвращаем ошибку 403 Forbidden для неадминистраторов
-
-    # Получаем все вакансии, находящиеся на рассмотрении
-    pending_jobs = Job.query.filter_by(status=None).all()
-
-    return render_template('admin_jobs.html', pending_jobs=pending_jobs)
 
