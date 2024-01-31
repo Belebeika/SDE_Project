@@ -5,7 +5,7 @@
 {% block content %}
     <h1>Создание нового резюме</h1>
 
-    <form method="post" action="{{ url_for('resume.create_resume') }}" enctype="multipart/form-data">
+    <form method="post" class ="dashboard" action="{{ url_for('resume.create_resume') }}" enctype="multipart/form-data">
         <label for="title">Заголовок:</label>
         <input type="text" id="title" name="title" required>
         <br>
@@ -18,11 +18,11 @@
         <!-- Поле для загрузки изображения -->
         <label for="image_file">Изображение:</label>
         <input type="file" name="image_file" id="image_file" style="display: none;" onchange="updateFileName()">
-        <button type="button" class="file-upload-btn" onclick="document.getElementById('image_file').click()">Выбрать файл</button>
+        <button type="button" class="microbutton2" onclick="document.getElementById('image_file').click()">Выбрать файл</button>
         <span id="file-name"></span>
         <br>
         <!-- Добавьте другие поля, если необходимо -->
-        <button type="submit">Создать резюме</button>
+        <button type="submit" class="microbutton3">Создать резюме</button>
     </form>
 
     <script>

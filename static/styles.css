@@ -397,3 +397,36 @@ main {
 .for_filter_floating {
     float : left;
 }
+
+.microbutton2 {
+    width: 10%;
+    background: #800080;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    border: 1px solid #ffffff;
+    font-size : 60%;
+    font-family: "century gothic", sans-serif;
+    font-weight : lighter;
+    margin-bottom: 2%;
+}
+.microbutton2:hover {
+    background : #f8ef02;
+}
+
+.microbutton3 {
+    width: 18%;
+    background: #800080;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    border: 1px solid #ffffff;
+    font-size : 80%;
+    font-family: "century gothic", sans-serif;
+    font-weight : lighter;
+    margin-bottom: 2%;
+    padding: 10px;
+}
+.microbutton3:hover {
+    background : #f8ef02;
+}

@@ -1,17 +1,5 @@
 {% extends 'base.html' %}
 
-<style>
-    .lil {
-    background: #bb6868;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-right: 30px;
-    padding-left: 30px;
-    border-radius : 15px;
-    border: medium solid #9e3a3a;
-}
-
-</style>
 
 {% block content %}
   <h2>Create a New Job</h2>
@@ -29,6 +17,6 @@
     <label for="image_file">Job Image:</label>
     <input type="file" name="image_file" id="image_file" accept="image/*"><br>
 
-    <button type="submit" class = "lil">Create Job</button>
+    <button type="submit" class="for_other_buttons" >Create Job</button>
   </form>
 {% endblock %}

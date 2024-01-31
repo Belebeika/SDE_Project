@@ -1,5 +1,3 @@
-<!-- region_selection.html -->
-
 {% extends 'base.html' %}
 
 {% block title %}Select Region{% endblock %}
@@ -8,10 +6,8 @@
    <div class="form-container">
             <form method="POST" action="{{ url_for('forum.jobs') }}">
                 {{ form.hidden_tag() }}
-                <div class="form-group">
                     <label for="{{ form.region.id }}">Выберите регион:</label>
                     {{ form.region(class="for_region_selection") }} {# Добавляем класс form-control для стилизации #}
-                </div>
                 <div class="form-group">
                     {{ form.submit }}
                 </div>
