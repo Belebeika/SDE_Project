@@ -14,10 +14,12 @@
     {% if is_admin %}
     <form method="GET" action="{{ url_for('CZN.resumes') }}">
         <select name="status">
+            <div class = "dashboard">
             <option value="all">Все резюме</option>
             <option value="pending">В рассмотрении</option>
             <option value="approved">Одобрены</option>
             <option value="rejected">Не одобрены</option>
+            </div>>
         </select>
         <input type="submit" value="Фильтровать">
     </form>
