@@ -5,42 +5,42 @@
 {% block title %}Главное меню{% endblock %}
 
 {% block content %}
-    <h1>Список резюме</h1>
+    <h1 class = "dashboard" >Список резюме</h1>
     {% if not current_user.employer_status and not current_user.is_admin %}
     <a href="{{ url_for('resume.create_resume') }}">Создать новое резюме</a>
     <p></p>
     {% endif %}
 
     {% if is_admin %}
-    <form method="GET" action="{{ url_for('CZN.resumes') }}">
-        <select name="status">
+    <form method="GET" action="{{ url_for('CZN.resumes') }}" class="filter-form">
+        <select name="status" class="filter-select">
             <option value="all">Все резюме</option>
             <option value="pending">В рассмотрении</option>
             <option value="approved">Одобрены</option>
             <option value="rejected">Не одобрены</option>
         </select>
-        <input type="submit" value="Фильтровать">
+        <input type="submit" class="microbutton4" value="Фильтровать">
     </form>
 {% endif %}
 
 
    {% for resume in resumes %}
-    <div class="resume-box">
-        <h2>{{ resume.title }}</h2>
-        <p>{{ resume.skills }}</p>
-        <p><strong>Статус:</strong> {% if resume.status==None %}В рассмотрении{% elif resume.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
+    <div class="job_plate">
+        <h2 class="job_content">{{ resume.title }}</h2>
+        <p class="job_content">{{ resume.skills }}</p>
+        <p class="job_content"><strong>Статус:</strong> {% if resume.status==None %}В рассмотрении{% elif resume.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
 
         <!-- Отображение изображения, если оно есть -->
         {% if resume.image_filename %}
-            <img src="{{ url_for('static', filename='img/resume_uploads/' + resume.image_filename) }}" alt="{{ resume.title }} Image" class="resume-image">
+            <img src="{{ url_for('static', filename='img/resume_uploads/' + resume.image_filename) }}" alt="{{ resume.title }} Image" class="job_img">
         {% endif %}
-    <a href="{{ url_for('resume.detail_resume', resume_id=resume.id) }}">Подробнее</a>
+    <a href="{{ url_for('resume.detail_resume', resume_id=resume.id) }}" class="job_content">Подробнее</a>
         {% if current_user.id == resume.user_id %}
-        <a href="{{ url_for('resume.edit_resume', resume_id=resume.id) }}">Редактировать</a>
-        <a href="{{ url_for('resume.delete_resume', resume_id=resume.id) }}">Удалить</a>
+        <a href="{{ url_for('resume.edit_resume', resume_id=resume.id) }}" class="job_content">Редактировать</a>
+        <a href="{{ url_for('resume.delete_resume', resume_id=resume.id) }}" class="job_content">Удалить</a>
         {% endif %}
     </div>
-    <hr>
+
 {% endfor %}
 
 

@@ -28,7 +28,7 @@
 {% endif %}
 
     {% else %}
-        <form method="GET" action="{{ url_for('CZN.jobs') }}">
+        <form method="GET" action="{{ url_for('CZN.jobs') }}" class="filter-form">
             <select name="region" class="filter-select">
                 <option value="all">Все регионы</option>
                 {% for region in regions %}
