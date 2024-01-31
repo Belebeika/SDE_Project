@@ -232,4 +232,3 @@ def admin_approve_job(job_id):
     return redirect(url_for('CZN.jobs'))
 
 
-

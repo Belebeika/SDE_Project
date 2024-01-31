@@ -49,8 +49,9 @@
                     {% endif %}
                     <h2 class="job_content">Специальность: {{ job.title }}</h2>
                     <h2 class="job_content"> Требования: {{ job.requirements }}</h2>
+                {% if current_user.is_authenticated and current_user.is_admin %}
                    <h2 class="job_content">Статус: {% if job.status==None %}В рассмотрении{% elif job.status %}Одобрена{% else %}Неодобрена{% endif %}</h2>
-
+                {%  endif%}
                     <a href="{{ url_for('job.show_job', job_id=job.id) }}" class = "job_content">Подробнее</a>
 
                     {% if current_user.is_authenticated and job.user_id == current_user.id %}

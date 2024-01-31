@@ -1,30 +1,37 @@
 {% extends "base.html" %}
 
-{% block title %}Edit Job - {{ job.title }}{% endblock %}
+{% block title %}Редактирование вакансии - {{ job.title }}{% endblock %}
 
 {% block content %}
-    <h1>Edit Job - {{ job.title }}</h1>
+    <h1>Редактирование вакансии - {{ job.title }}</h1>
 
     <form method="post" action="{{ url_for('job.edit_job', job_id=job.id) }}" enctype="multipart/form-data">
-        <label for="title">Title:</label>
-        <input type="text" name="title" value="{{ job.title }}" required><br>
+        <div class="form-group">
+            <label for="title">Название:</label>
+            <input type="text" id="title" name="title" value="{{ job.title }}" required>
+        </div>
 
-        <label for="description">Description:</label>
-        <textarea name="description" required>{{ job.description }}</textarea><br>
+        <div class="form-group">
+            <label for="description">Описание:</label>
+            <textarea name="description" required>{{ job.description }}</textarea>
+        </div>
 
-        <label for="requirements">Requirements:</label>
-        <textarea name="requirements" required>{{ job.requirements }}</textarea><br>
+        <div class="form-group">
+            <label for="requirements">Требования:</label>
+            <textarea name="requirements" required>{{ job.requirements }}</textarea>
+        </div>
 
         <!-- Добавлено поле для загрузки изображения -->
-        <label for="image_file">Image:</label>
-        <input type="file" name="image_file">
-        {% if job.image_filename %}
-            <img src="{{ url_for('static', filename='img/job_uploads/' + job.image_filename) }}" alt="{{ job.title }} Image" style="max-width: 100%; height: auto;">
-        {% endif %}
-        <br>
+        <div class="form-group">
+            <label for="image_file">Изображение:</label>
+            <input type="file" name="image_file" id="image_file">
+            {% if job.image_filename %}
+                <img src="{{ url_for('static', filename='img/job_uploads/' + job.image_filename) }}" alt="{{ job.title }} Изображение" style="max-width: 100%; height: auto;">
+            {% endif %}
+        </div>
 
-        <button type="submit">Save Changes</button>
+        <button type="submit" class="for_other_buttons">Сохранить изменения</button>
     </form>
 
-    <a href="{{ url_for('CZN.jobs') }}">Cancel</a>
+    <a href="{{ url_for('CZN.jobs') }}" class="btn btn-secondary">Отмена</a>
 {% endblock %}

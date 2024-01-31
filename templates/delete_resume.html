@@ -3,14 +3,16 @@
 {% block title %}Удаление резюме{% endblock %}
 
 {% block content %}
+    <div class="dashboard">
     <h1>Вы уверены, что хотите удалить резюме?</h1>
 
     <p><strong>Заголовок:</strong> {{ resume.title }}</p>
     <p><strong>Описание:</strong> {{ resume.description }}</p>
     <p><strong>Навыки:</strong> {{ resume.skills }}</p>
     <!-- Добавьте другие поля, если необходимо -->
+    </div>
 
     <form method="post" action="{{ url_for('resume.delete_resume', resume_id=resume.id) }}">
-        <button type="submit">Удалить</button>
+        <button type="submit" class="for_other_buttons">Удалить</button>
     </form>
 {% endblock %}

@@ -3,11 +3,13 @@
 {% block title %}Удаление вакансии{% endblock %}
 
 {% block content %}
+    <div class="dashboard">
     <h1>Удаление вакансии</h1>
     <p>Вы уверены, что хотите удалить вакансию "{{ job.title }}"?</p>
+    </div>
 
     <form method="post" action="{{ url_for('job.delete_job', job_id=job.id) }}">
-        <button type="submit">Подтвердить удаление</button>
+        <button type="submit" class="for_other_buttons">Подтвердить удаление</button>
     </form>
 
     <a href="{{ url_for('CZN.jobs') }}">Отмена</a>

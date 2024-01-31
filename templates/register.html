@@ -2,7 +2,6 @@
 {% block title %}Регистрация{% endblock %}
 {% block content %}
     <div class="register-page">
-
         <div class="register-container form-container">
             <h2>Регистрация</h2>
             <form method="POST">
@@ -19,30 +18,34 @@
                     <label for="{{ form.age.id }}">Возраст:</label>
                     {{ form.age }}
                 </div>
-                <div class="filter-form">
+                <div class="form-group">
                     <label for="{{ form.region.id }}">Регион:</label>
-                    {{ form.region }}
+                    <select name="region" class="filter-select">
+                        <option value="all">Выберите регион</option>
+                        {% for region in form.region.choices %}
+                            <option value="{{ region[0] }}">{{ region[1] }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="{{ form.email.id }}">Электронная почта:</label>
                     {{ form.email }}
                 </div>
-                    <div class="form-group">
-                        <label for="{{ form.phone_number.id }}">Номер телефона:</label>
-                        {{ form.phone_number }}
-                    </div>
                 <div class="form-group">
-                        <label for="{{ form.employer_status.id }}">Статус работодателя:</label>
-                        {{ form.employer_status(class="form-check-input") }}
+                    <label for="{{ form.phone_number.id }}">Номер телефона:</label>
+                    {{ form.phone_number }}
+                </div>
+                <div class="form-group">
+    <label for="{{ form.employer_status.id }}">Статус работодателя:</label>
+    {{ form.employer_status(class="form-check-input employer-checkbox") }}
+    <!-- Добавлено скрытое поле для передачи значения False, если флажок не установлен -->
+    <input type="hidden" name="{{ form.employer_status.name }}" value="false">
+</div>
 
-                        <!-- Добавлено скрытое поле для передачи значения False, если флажок не установлен -->
-                        <input type="hidden" name="{{ form.employer_status.name }}" value="false">
-                    </div>
                 <div class="form-group">
                     <label for="{{ form.password.id }}">Пароль:</label>
                     {{ form.password }}
                 </div>
-
                 <div class="form-group">
                     <label for="{{ form.confirm_password.id }}">Подтвердите пароль:</label>
                     {{ form.confirm_password }}
@@ -56,7 +59,7 @@
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="notification is-danger">
-                {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+                {{ messages[0] }}. Перейти на <a href="{{ url_for('auth.login') }}">страницу входа</a>.
             </div>
         {% endif %}
     {% endwith %}

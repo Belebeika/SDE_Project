@@ -11,11 +11,11 @@
     <p>Статус: {% if job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
 
     <form method="post" action="{{ url_for('job.approve_review_job', job_id=job.id) }}">
-        <button type="submit">Одобрить работу</button>
+        <button type="submit" class="microbutton">Одобрить работу</button>
     </form>
 
     <form method="post" action="{{ url_for('job.reject_review_job', job_id=job.id) }}">
-        <button type="submit">Отклонить работу</button>
+        <button type="submit" class="microbutton">Отклонить работу</button>
     </form>
 
     <a href="{{ url_for('CZN.jobs') }}">Назад к работам</a>

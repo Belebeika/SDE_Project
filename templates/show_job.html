@@ -3,38 +3,54 @@
 {% block title %}{{ job.title }}{% endblock %}
 
 {% block content %}
-    <div class = "dashboard">
-    <p>{{ job.title }}</p>
-    <p>{{ job.description }}</p>
-    <p>Требования: {{ job.requirements }}</p>
-    <p>Статус: {% if job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
-    </div>
-    {% if current_user.is_authenticated and not current_user.is_admin and not current_user.employer_status %}
-        <h2>Прикрепление резюме</h2>
-        <form method="post" action="{{ url_for('job.show_job', job_id=job.id) }}">
-            {{ apply_form.hidden_tag() }}
-            {{ apply_form.resumes.label }}: {{ apply_form.resumes() }}<br> {# Добавлено поле выбора резюме #}
-            <input type="submit" value="Прикрепить">
-        </form>
-    {% endif %}
+    <div class="dashboard">
+        <h1>{{ job.title }}</h1>
+        <p>{{ job.description }}</p>
+        <p>Требования: {{ job.requirements }}</p>
+        <p>Статус: {% if job.status %}Одобрена{% else %}Неодобрена{% endif %}</p>
 
-    {% if current_user.is_authenticated and job.user_id == current_user.id %}
-    <h2>Resumes for this Job</h2>
-    {% if job_resumes %}
-        <ul>
-            {% for resume in job_resumes %}
-                <li>
-                    <a href="{{ url_for('resume.detail_resume', resume_id=resume.id) }}">
-                        {{ resume.title }} - {{ resume.user.firstname }} {{ resume.user.lastname }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-
-    {% else %}
-        <p>No resumes submitted for this job.</p>
+        {% if current_user.is_authenticated %}
+            {% if current_user.is_admin %}
+                <form method="post" action="{{ url_for('job.admin_approve_job', job_id=job.id) }}">
+                    <button type="submit" name="approve" value="true" class="microbutton">Одобрить</button>
+                </form>
+                <form method="post" action="{{ url_for('job.reject_job', job_id=job.id) }}">
+                    <button type="submit" name="reject" value="true" class="microbutton">Отклонить</button>
+                </form>
+            {% elif not current_user.employer_status %}
+                <h2>Прикрепление резюме</h2>
+                <form method="post" action="{{ url_for('job.show_job', job_id=job.id) }}">
+                    {{ apply_form.hidden_tag() }}
+                    <div class="form-group">
+                        <label for="resumes">Выберите резюме для прикрепления:</label>
+                        <select name="resumes" class="form-control">
+                            {% for resume_id, resume_title in apply_form.resumes.choices %}
+                                <option value="{{ resume_id }}">{{ resume_title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="microbutton">Прикрепить</button>
+                </form>
+            {% endif %}
         {% endif %}
-    {% endif %}
 
-    <a href="{{ url_for('CZN.jobs') }}">Назад к вакансиям</a>
+        {% if current_user.is_authenticated and job.user_id == current_user.id %}
+            <h2>Прикреплённые резюме</h2>
+            {% if job_resumes %}
+                <ul>
+                    {% for resume in job_resumes %}
+                        <li>
+                            <a href="{{ url_for('resume.detail_resume', resume_id=resume.id) }}">
+                                {{ resume.title }} - {{ resume.user.firstname }} {{ resume.user.lastname }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>К этой вакансии ещё нет прикреплённых резюме</p>
+            {% endif %}
+        {% endif %}
+
+        <a href="{{ url_for('CZN.jobs') }}" class="btn btn-secondary">Назад к вакансиям</a>
+    </div>
 {% endblock %}

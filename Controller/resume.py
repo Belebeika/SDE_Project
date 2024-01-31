@@ -52,15 +52,18 @@ def create_resume():
         else:
             image_filename = None
 
-        new_resume = Resume(title=title, description=description, skills=skills, image_filename=image_filename, user=current_user)
+        # Устанавливаем значение status в False по умолчанию
+        status = None
+
+        new_resume = Resume(title=title, description=description, skills=skills, image_filename=image_filename, user=current_user, status=status)
 
         try:
             db.session.add(new_resume)
             db.session.commit()
-            flash('Resume created successfully!', 'success')
+            flash('Резюме успешно создано!', 'success')
             return redirect(url_for('CZN.resumes'))
         except:
-            flash('An error occurred while adding the resume!', 'error')
+            flash('Произошла ошибка при добавлении резюме!', 'error')
 
     return render_template("create_resume.html")
 
@@ -133,6 +136,9 @@ def admin_approve_resume(resume_id):
     return redirect(url_for('CZN.resumes'))
 
 
+from Model.models import job_resume_association
+
+
 @resume.route('/resume/<int:resume_id>/delete', methods=['GET', 'POST'])
 def delete_resume(resume_id):
     resume = Resume.query.get(resume_id)
@@ -141,18 +147,25 @@ def delete_resume(resume_id):
         abort(404, description="Резюме не найдено")
 
     if request.method == 'POST':
-        # Удаление связанного файла изображения
-        delete_resume_image(resume.image_filename)
-
         try:
+            # Удаляем связи резюме с вакансиями в таблице job_resume_association
+            db.session.query(job_resume_association).filter_by(resume_id=resume_id).delete()
+
+            # Затем удаляем само резюме
             db.session.delete(resume)
             db.session.commit()
-            flash('Resume deleted successfully!', 'success')
+
+            # Если всё прошло успешно, возвращаемся к списку резюме
+            flash('Резюме успешно удалено!', 'success')
             return redirect(url_for('CZN.resumes'))
         except:
-            flash('An error occurred while deleting the resume', 'error')
+            # Если произошла ошибка, откатываем изменения и выводим сообщение об ошибке
+            db.session.rollback()
+            flash('Произошла ошибка при удалении резюме!', 'error')
 
     return render_template('delete_resume.html', resume=resume)
+
+
 
 def delete_resume_image(image_filename):
     if image_filename:

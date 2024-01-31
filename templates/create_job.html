@@ -1,22 +1,21 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-  <h2>Create a New Job</h2>
+  <h2>Создание новой вакансии</h2>
   <form method="post" action="{{ url_for('job.create_job') }}" enctype="multipart/form-data">
-    <label for="title">Title:</label>
+    <label for="title">Название:</label>
     <input type="text" name="title" required><br>
 
-    <label for="description">Description:</label>
+    <label for="description">Описание:</label>
     <textarea name="description" required></textarea><br>
 
-    <label for="requirements">Requirements:</label>
+    <label for="requirements">Требования:</label>
     <textarea name="requirements" required></textarea><br>
 
     <!-- Добавляем поле для загрузки файла -->
-    <label for="image_file">Job Image:</label>
+    <label for="image_file">Изображение вакансии:</label>
     <input type="file" name="image_file" id="image_file" accept="image/*"><br>
 
-    <button type="submit" class="for_other_buttons" >Create Job</button>
+    <button type="submit" class="for_other_buttons">Создать вакансию</button>
   </form>
 {% endblock %}

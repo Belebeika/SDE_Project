@@ -75,29 +75,24 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #f8ef02;
 
-}
-
-/* Стили для страницы входа и регистрации */
+}/* Стили для страницы входа и регистрации */
 .login-page, .register-page {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 50vh; /* Занимаем 60% высоты экрана */
+    align-items: flex-start; /* Выравнивание по верхнему краю */
+    height: auto; /* Автоматическая высота */
     margin-bottom: 20px; /* Восстанавливаем отступ между блоками */
-    padding-right : 40px;
+    padding-right: 40px;
 }
 
 .login-container, .register-container {
     background: #45003c;
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-bottom: 10px;
+    padding: 20px; /* Объединяем padding-right и padding-left */
     max-width: 400px; /* Максимальная ширина блока */
     width: 100%; /* Ширина блока 100% */
     box-sizing: border-box; /* Учтем padding в ширине */
     margin-bottom: 20px; /* Восстанавливаем отступ между блоками */
     border: 2px solid #f8ef02;
-
 }
 
 .login-container h2, .register-container h2 {
@@ -106,6 +101,7 @@ input[type="submit"]:hover {
     margin-bottom: 20px;
     font-size: 36px;
 }
+
 
 /* Стили для Header и навигации */
 header {
@@ -448,4 +444,9 @@ main {
 }
 .microbutton4:hover {
     background : #f8ef02;
+}
+
+.employer-checkbox {
+    width: 20px; /* задает ширину галочки */
+    height: 20px; /* задает высоту галочки */
 }
